@@ -1,0 +1,23 @@
+site_name: Tack Til Note.
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/InTack2
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/Tack2_3D
+
+theme:
+  name: material
+  features:
+    - tabs
+  language: ja
+  palette:
+    primary: blue
+    accent: blue
+plugins:
+  - search # necessary for search to work]
+  - awesome-pages
+
+markdown_extensions:
+  - admonition
+
