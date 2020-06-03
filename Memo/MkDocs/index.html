@@ -43,6 +43,10 @@
     
     
     
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
     
       
     
@@ -161,7 +165,7 @@
   <li class="md-tabs__item">
     
       <a href="../.." class="md-tabs__link">
-        Home
+        このサイトについて
       </a>
     
   </li>
@@ -225,8 +229,6 @@
   
 
       
-        
-      
     </ul>
   </div>
 </nav>
@@ -271,8 +273,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="Home" class="md-nav__link">
-      Home
+    <a href="../.." title="このサイトについて" class="md-nav__link">
+      このサイトについて
     </a>
   </li>
 
@@ -502,7 +504,28 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    環境構築
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     基本コマンド
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    使う上でおすすめな設定
   </a>
   
 </li>
@@ -516,18 +539,6 @@
         
       </ul>
     </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../about/" title="Veni tange poterat positus purgamina officium scelerata" class="md-nav__link">
-      Veni tange poterat positus purgamina officium scelerata
-    </a>
   </li>
 
     
@@ -558,7 +569,28 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    環境構築
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     基本コマンド
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    使う上でおすすめな設定
   </a>
   
 </li>
@@ -581,30 +613,38 @@
                 
                 <h1 id="mkdocs">MkDocs</h1>
 <p>このサイト自体に使用している静的サイトジェネレーター。  </p>
-<h2 id="_1">基本コマンド</h2>
-<p>個人的にpipenv使用なので、pipenv ~を記載してますが、通常pipenv ~は必要なし。  </p>
+<h2 id="_1">参考</h2>
+<p><a href="https://qiita.com/mebiusbox2/items/a61d42878266af969e3c">MkDocsによるドキュメント作成</a></p>
+<h2 id="_2">環境構築</h2>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>pipenv install
+</code></pre></div>
+</td></tr></table>
+
+<h2 id="_3">基本コマンド</h2>
+<p>個人的にpipenv使用なので、pipenv ~を記載してますが、通常pipenv ~は必要なし。<br />
+pipenvはいいぞ。  </p>
 <ul>
 <li>サイトのプレビュー</li>
 </ul>
-<pre><code class="bash">pipenv run mkdocs serve
-</code></pre>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>pipenv run mkdocs serve
+</code></pre></div>
+</td></tr></table>
 
 <ul>
 <li>サイトビルド</li>
 </ul>
-<pre><code class="bash">pipenv run mkdocs build
-</code></pre>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>pipenv run mkdocs build
+</code></pre></div>
+</td></tr></table>
 
 <ul>
-<li>標準のgithub.ioへのアップ<br />
-下記の理由により使用していない<ul>
-<li>個人的にブランチ分けるほどでもない</li>
-<li>github.ioが指定フォルダをサイトにアップできる様になった</li>
+<li>標準のgithub.ioへのアップ  </li>
 </ul>
-</li>
-</ul>
-<pre><code class="bash">pipenv run mkdocs gh-deploy
-</code></pre>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>pipenv run mkdocs gh-deploy
+</code></pre></div>
+</td></tr></table>
+
+<h2 id="_4">使う上でおすすめな設定</h2>
                 
               
               
@@ -637,20 +677,6 @@
             </div>
           </a>
         
-        
-          <a href="../../about/" title="Veni tange poterat positus purgamina officium scelerata" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  次
-                </span>
-                Veni tange poterat positus purgamina officium scelerata
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
         
       </nav>
     </div>
