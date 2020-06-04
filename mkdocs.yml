@@ -1,4 +1,15 @@
 site_name: Tack Til Note.
+site_url: https://intack2.github.io/til-note/
+site_author: InTack2
+
+repo_name: InTack2/til-note
+repo_url: https://github.com/InTack2/til-note
+edit_uri: ""
+
+google_analytics:
+  - "UA-165693276-2"
+  - "auto"
+
 extra:
   social:
     - icon: fontawesome/brands/github-alt
@@ -20,4 +31,10 @@ plugins:
 
 markdown_extensions:
   - admonition
+  - fontawesome_markdown
+  - codehilite:
+      linenums: true
 
+extra_css:
+    - "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
+    - "stylesheets/extra.css"
