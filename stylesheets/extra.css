@@ -1,20 +1,17 @@
 
 
 .md-typeset h1 {
-    font-size: 30pt;
+    font-size: 26pt;
     font-weight: bold;
     color: #000;
     border-bottom: solid 2px #4088e7;
     padding-bottom: 3px;
 }
 
-.md-typeset h2:before {
-    content: "\f461";
-    font-family: FontAwesome;
-}
-
-
 .md-typeset h2 {
     border-bottom: 1px dotted #888;
 }
 
+.wy-menu-vertical span {
+    color: #ff0;
+  }
