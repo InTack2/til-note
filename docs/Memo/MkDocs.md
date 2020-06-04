@@ -2,25 +2,38 @@
 このサイト自体に使用している静的サイトジェネレーター。  
 
 
+## 参考
+
+[MkDocsによるドキュメント作成](https://qiita.com/mebiusbox2/items/a61d42878266af969e3c)
+
+## 環境構築
+
+``` bash
+pipenv install
+```
+
 ## 基本コマンド
 個人的にpipenv使用なので、pipenv ~を記載してますが、通常pipenv ~は必要なし。  
+pipenvはいいぞ。  
 
 - サイトのプレビュー
-```bash
+
+``` bash
 pipenv run mkdocs serve
 ```
 
 - サイトビルド
 
-```bash
+``` bash
 pipenv run mkdocs build
 ```
 
 - 標準のgithub.ioへのアップ  
-下記の理由により使用していない
-    - 個人的にブランチ分けるほどでもない
-    - github.ioが指定フォルダをサイトにアップできる様になった
 
-```bash
+``` bash
 pipenv run mkdocs gh-deploy
 ```
+
+## 使う上でおすすめな設定
+
+## テストテスト
