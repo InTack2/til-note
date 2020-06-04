@@ -12,6 +12,7 @@ flake8 = "*"
 mkdocs = "*"
 mkdocs-material = "*"
 mkdocs-awesome-pages-plugin = "*"
+fontawesome-markdown = "*"
 
 [requires]
 python_version = "3.8"

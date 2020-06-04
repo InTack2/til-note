@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "640e3bfd657aa791a4e59615946ccc9362dac327a224f5cbc7cbe927b9e2df86"
+            "sha256": "1371b4746db6d055845493148e75e690487dfc5f9e497c518d14cbc35660f60f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -22,6 +22,13 @@
                 "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"
             ],
             "version": "==7.1.2"
+        },
+        "fontawesome-markdown": {
+            "hashes": [
+                "sha256:95a12f1629a595afc4aabc886ffdb8b5fa0ae8f77e8f3437b7b1942d91f91f4b"
+            ],
+            "index": "pypi",
+            "version": "==0.2.6"
         },
         "future": {
             "hashes": [
@@ -221,10 +228,10 @@
         },
         "tqdm": {
             "hashes": [
-                "sha256:4733c4a10d0f2a4d098d801464bdaf5240c7dadd2a7fde4ee93b0a0efd9fb25e",
-                "sha256:acdafb20f51637ca3954150d0405ff1a7edde0ff19e38fb99a80a66210d2a28f"
+                "sha256:07c06493f1403c1380b630ae3dcbe5ae62abcf369a93bbc052502279f189ab8c",
+                "sha256:cd140979c2bebd2311dfb14781d8f19bd5a9debb92dcab9f6ef899c987fcf71f"
             ],
-            "version": "==4.46.0"
+            "version": "==4.46.1"
         }
     },
     "develop": {
