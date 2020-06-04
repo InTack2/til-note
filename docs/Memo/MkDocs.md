@@ -33,7 +33,3 @@ pipenv run mkdocs build
 ``` bash
 pipenv run mkdocs gh-deploy
 ```
-
-## 使う上でおすすめな設定
-
-## テストテスト
