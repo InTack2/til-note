@@ -36,5 +36,7 @@ markdown_extensions:
       linenums: true
 
 extra_css:
-    - "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
-    - "stylesheets/extra.css"
+  - "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
+  - "stylesheets/extra.css"
+  - "stylesheets/codehilite.css"
+  - "stylesheets/dark_theme.css"
