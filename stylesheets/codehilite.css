@@ -1,3 +1,6 @@
+
+/* https://github.com/lonekorean/gist-syntax-themes */
+@import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/idle-fingers.css');
 /*
 /////////////////
 // Inline Code //
@@ -12,6 +15,7 @@
   box-shadow: none;
   font-family: "Source Han Code JP";
 }
+
 
 /*
 /////////////////
@@ -31,20 +35,16 @@ line number
 code block background
 */
 .codehilite {
-  background-color: #424242 !important;
+  background-color: #272727 !important;
 }
 
 /*
 scroll bar size
 */
-
 .md-typeset .codehilite::-webkit-scrollbar {
   height: 1rem !important;
 }
 
-/*
-actual syntax highlighting
-*/
 .codehilite pre { color: #FAFAFA !important; background-color: transparent !important; }
 .codehilite .hll { background-color: #272822 !important; }
 .codehilite .c { color: #75715e !important } /* Comment */
