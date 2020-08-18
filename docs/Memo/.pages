@@ -1,0 +1,5 @@
+arrange:
+    - index.md
+    - Python
+    - PowerShell.md
+    - MkDocs.md
