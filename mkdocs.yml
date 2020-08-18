@@ -21,22 +21,42 @@ theme:
   name: material
   features:
     - tabs
+    - instant
   language: ja
   palette:
     primary: blue
     accent: blue
+    scheme: slate
 plugins:
   - search # necessary for search to work]
   - awesome-pages
 
 markdown_extensions:
-  - admonition
-  - fontawesome_markdown
-  - codehilite:
-      linenums: true
+  - admonition # アノテーションブロックを有効
+  - codehilite # コードハイライトを有効
+  - footnotes # 下部への注釈表記を有効
+  - tables # テーブルを有効
+  - pymdownx.arithmatex # Arithmatex統合を有効
+  - pymdownx.mark # ハイライト機能を有効
+  - pymdownx.details # 折り畳みアノテーションを有効
+  - pymdownx.keys # キーショートカットの表示
+  - pymdownx.tabbed # タブ表示の有効化
+  - pymdownx.caret # キャレットを有効化
+  - pymdownx.tasklist # タスクリスト表示を有効
+  - pymdownx.superfences # admonitionブロック内で複数行の記述を有効
+  - pymdownx.tilde # チルダ表記を有効
+  - fontawesome_markdown # :<id>:を使用して絵文字の入力できる機能を有効
+  - markdown_blockdiag: # Makrkdownダイアグラムを有効
+      format: svg
+  - pymdownx.emoji: # 絵文字を有効
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - toc:
+      permalink: true # パーマリンクを有効
 
 extra_css:
-  - "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
-  - "stylesheets/extra.css"
-  - "stylesheets/codehilite.css"
-  - "stylesheets/dark_theme.css"
+  - https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/extra.js
