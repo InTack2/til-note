@@ -1,21 +1,84 @@
+div.md-grid{
+    max-width: 75rem;
+}
+
+/* div.md-container h1 {
+    display: inline-flex;
+} */
 
 
-.md-typeset h1 {
+div.md-container h1::before {
+    margin-right : 16px;
+    font-family: "FontAwesome" !important;
+    content: "\f02e" !important;
+}
+
+
+
+div.md-container h1 {
     /* font-size: 26pt;
-    font-weight: bold;
-    color: #000; */
-    border-bottom: solid 2px #2b5996;
+    font-weight: bold;*/
+    color: rgb(255, 255, 255); 
+    display: flex;
+    counter-reset: h2;
+    border-bottom: 2mm ridge #2b5996;
     padding-bottom: 2px;
 }
 
-.md-typeset h2 {
-    border-bottom: 1px dotted #29466d;
+div.md-container h2::before{
+    margin-right : 8px;
+    font-family: "FontAwesome" !important;
+    content: "\f105" !important;
+}
+
+div.md-container h2 {
+    display: flex;
+    counter-reset: h3;
+    border-bottom: solid 4px #2b5996;
+    /* border-bottom: 1px dotted #29466d; */
     padding-bottom: 2px;
 }
 
-.wy-menu-vertical span {
-    color: #ff0;
-  }
+
+div.md-container h3 {
+    display: flex;
+    counter-reset: h4;
+    counter-increment: h3;
+    border-bottom: 2px dashed #2b5996;
+}
+
+div.md-container h3::before {
+    margin-right : 8px;
+    content: counter(h3) ". " !important;
+}
+
+div.md-container h4 {
+    display: flex;
+    counter-increment: h4;
+    border-bottom: dotted 1px #2b5996;
+}
+
+div.md-container h4::before {
+    margin-right : 8px;
+    content: counter(h3) "-" counter(h4) ". " !important;
+}
+
+
 body {
     font-family: "Source Han Code JP";
+}
+
+div.highlight code {
+    font-family: "Source Han Code JP";
+}
+
+label.md-nav__link {
+    background-color: #3694e0;
+    padding: 2px 2px 2px 10px;
+    font-size: 0.7rem;
+    margin-top: 0.2rem;
+  }
+
+.md-typeset__table table thead{
+    background-color: #3694e0;
 }
