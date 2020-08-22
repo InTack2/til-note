@@ -1,4 +1,4 @@
-# PythonでCLI上で対話的にユーザー入力させる
+# Pythonを使ってCLI上で対話的にユーザー入力させる
 
 こんな感じのやつが可能。
 [![Image from Gyazo](https://i.gyazo.com/234794e430c4ab5945eb005b98946550.gif)](https://gyazo.com/234794e430c4ab5945eb005b98946550)
