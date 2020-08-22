@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "start_serve",
+            "type": "shell",
+            "command": "pipenv run mkdocs serve",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "site_build",
+            "type": "shell",
+            "command": "pipenv run mkdocs build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+        },
+        {
+            "label": "site_deploy",
+            "type": "shell",
+            "command": "pipenv run mkdocs gh-deploy",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
