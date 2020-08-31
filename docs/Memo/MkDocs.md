@@ -32,3 +32,30 @@ pipenv run mkdocs build
 ``` bash
 pipenv run mkdocs gh-deploy
 ```
+
+## Admonition
+Infoなどのアイコンつき文言
+
+!!! Note
+    ノート
+
+!!! Tip
+    ヒント
+
+!!! summary
+    概要
+
+!!! Warning
+    警告
+
+!!! Danger
+    危険
+
+!!! Success
+    成功
+
+!!! Failure
+    失敗
+
+!!! Bug
+    バグ
