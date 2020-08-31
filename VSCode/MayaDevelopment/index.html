@@ -337,10 +337,9 @@
     概要
   </a>
   
-    <nav class="md-nav" aria-label="概要">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#path" class="md-nav__link">
     外部フォルダへのPathを通す
   </a>
@@ -395,11 +394,6 @@
   <a href="#vscode_1" class="md-nav__link">
     vscodeからの警告やエラーを確認する
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -707,10 +701,9 @@
     概要
   </a>
   
-    <nav class="md-nav" aria-label="概要">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#path" class="md-nav__link">
     外部フォルダへのPathを通す
   </a>
@@ -777,11 +770,6 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
     </ul>
   
@@ -802,28 +790,28 @@
                 <h1 id="maya">Maya用開発情報<a class="headerlink" href="#maya" title="Permanent link">&para;</a></h1>
 <h2 id="_1">概要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>VSCodeのMaya開発時に必要な情報まとめ</p>
-<h3 id="path">外部フォルダへのPathを通す<a class="headerlink" href="#path" title="Permanent link">&para;</a></h3>
-<h4 id="_2">背景<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<h2 id="path">外部フォルダへのPathを通す<a class="headerlink" href="#path" title="Permanent link">&para;</a></h2>
+<h3 id="_2">背景<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>Mayaの場合、パッケージを直接インストールすると配布後に各環境にインストールする必要がある為、<br />
 外部フォルダにインストールしていたりする。<br />
 <a href="../../Maya/sitepackages.md">こんなイメージ</a>  </p>
-<h4 id="_3">問題点<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<h3 id="_3">問題点<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>もちろんそんな事VSCodeは知らないので、
 mayapyをインタープリターに設定してもそんなパッケージないよエラーが表示される<br />
 それにFlake8やPytestをOnにしているとパッケージがないよ、インストールする？と聞かれてしまう<br />
 (それに気軽にOKしてしまうとmayapyにpip install を開始する。やさしさだね。)</p>
-<h4 id="_4">回避方法<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<h3 id="_4">回避方法<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>いくつ方法があるが、この方法が一番簡単で問題がなくおすすめ  </p>
-<h5 id="env">.envファイルを作成する<a class="headerlink" href="#env" title="Permanent link">&para;</a></h5>
+<h4 id="env">.envファイルを作成する<a class="headerlink" href="#env" title="Permanent link">&para;</a></h4>
 <p>下記の様にプロジェクト直下に.envファイルを作成する<br />
 <a href="https://gyazo.com/83966090124c98b3a0caa7191b09b2da"><img alt="Image from Gyazo" src="https://i.gyazo.com/83966090124c98b3a0caa7191b09b2da.png" /></a></p>
-<h5 id="env_1">.envファイル内にフォルダへのパスを追加する<a class="headerlink" href="#env_1" title="Permanent link">&para;</a></h5>
+<h4 id="env_1">.envファイル内にフォルダへのパスを追加する<a class="headerlink" href="#env_1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">env</span><span class="p">:</span><span class="nv">PYTHONPATH</span><span class="si">}</span><span class="s2">;追加したいsite-packagesへのパス&quot;</span>
 </code></pre></div>
 
-<h5 id="vscode">vscodeを再起動する<a class="headerlink" href="#vscode" title="Permanent link">&para;</a></h5>
+<h4 id="vscode">vscodeを再起動する<a class="headerlink" href="#vscode" title="Permanent link">&para;</a></h4>
 <p>.envの更新すると自動的に更新されるわけではないので、再起動が必要。  </p>
-<h5 id="vscode_1">vscodeからの警告やエラーを確認する<a class="headerlink" href="#vscode_1" title="Permanent link">&para;</a></h5>
+<h4 id="vscode_1">vscodeからの警告やエラーを確認する<a class="headerlink" href="#vscode_1" title="Permanent link">&para;</a></h4>
 <p>Flake8のエラーやimport文記載時のエラーがなくなっていれば完了です。  </p>
                 
               
