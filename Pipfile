@@ -13,6 +13,7 @@ mkdocs-material = "*"
 mkdocs-awesome-pages-plugin = "*"
 fontawesome-markdown = "*"
 markdown-blockdiag = "*"
+mkdocs-git-revision-date-localized-plugin = "*"
 
 [requires]
 python_version = "3.8"

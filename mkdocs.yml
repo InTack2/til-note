@@ -30,6 +30,7 @@ theme:
 plugins:
   - search # necessary for search to work]
   - awesome-pages
+  - git-revision-date-localized
 
 markdown_extensions:
   - admonition # アノテーションブロックを有効
