@@ -12,6 +12,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Git config
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email actions@github.com
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -31,7 +36,7 @@ jobs:
         id: cache-pipenv
         uses: actions/cache@v1
         with:
-          path: ~/.local/share/virtualenvs
+          path: $HOME/.virtualenvs
           key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
 
       - name: Install dependencies
