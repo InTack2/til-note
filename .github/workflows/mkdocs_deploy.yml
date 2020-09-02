@@ -11,26 +11,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Gitのユーザー設定
       - name: Git config
         run: |
           git config --global user.name "github-actions"
           git config --global user.email actions@github.com
 
+      # Git認証
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
+      # Pythonインストール
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: "3.8"
 
+      # pipenvインストール
       - name: Install pipenv and libpq
         run: |
-          sudo apt-get install libpq-dev -y
+          # sudo apt-get install libpq-dev -y
           pip install pipenv
 
+      # pipenvのvirtualenvをcache
       - name: Cache pipenv virtualenv
         id: cache-pipenv
         uses: actions/cache@v1
@@ -38,10 +43,12 @@ jobs:
           path: ~/.local/share/virtualenvs
           key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
 
+      # cacheがなければ、インストール
       - name: Install dependencies
         if: steps.cache-pipenv.outputs.cache-hit != 'true'
         run: pipenv install
 
+      # MkDocsのデプロイ
       - name: MkDocs deploy
         run: |
           git fetch --depth=1 origin master
