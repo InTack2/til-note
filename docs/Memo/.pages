@@ -3,3 +3,4 @@ arrange:
     - Python
     - PowerShell.md
     - MkDocs.md
+    - GithubActions.md
