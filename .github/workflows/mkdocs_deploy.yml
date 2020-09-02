@@ -30,9 +30,8 @@ jobs:
           python-version: "3.8"
 
       # pipenvインストール
-      - name: Install pipenv and libpq
+      - name: Install pipenv
         run: |
-          # sudo apt-get install libpq-dev -y
           pip install pipenv
 
       # pipenvのvirtualenvをcache
