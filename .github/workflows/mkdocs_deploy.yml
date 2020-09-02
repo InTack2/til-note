@@ -8,9 +8,9 @@ on:
       - "mkdocs.yml"
 env:
   # Define PipEnv venv path
-  WORKON_HOME: $HOME/.pipenv/venvs
+  WORKON_HOME: ~\.pipenv\venvs
   # Define PipEnv cache path
-  PIPENV_CACHE_DIR: $HOME/.pipenv/pipcache
+  PIPENV_CACHE_DIR: ~\.pipenv\pipcache
 jobs:
   deploy:
     runs-on: windows-latest
@@ -40,7 +40,7 @@ jobs:
         id: cache-pipenv
         uses: actions/cache@v1
         with:
-          path: $HOME/.pipenv/venvs
+          path: ~\.pipenv\venvs
           key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pipenv-
