@@ -6,14 +6,9 @@ on:
     paths:
       - "docs/**/*.md"
       - "mkdocs.yml"
-env:
-  # Define PipEnv venv path
-  WORKON_HOME: env.HOME\.pipenv\venvs
-  # Define PipEnv cache path
-  PIPENV_CACHE_DIR: env.HOME\.pipenv\pipcache
 jobs:
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Git config
@@ -27,23 +22,21 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: "3.8"
 
-      - name: Install pipenv
+      - name: Install pipenv and libpq
         run: |
-          python -m pip install --upgrade pip
-          pip install pipenv --upgrade-strategy=only-if-needed
+          sudo apt-get install libpq-dev -y
+          pip install pipenv
 
       - name: Cache pipenv virtualenv
         id: cache-pipenv
         uses: actions/cache@v1
         with:
-          path: env.HOME\.pipenv\venvs
+          path: ~/.local/share/virtualenvs
           key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pipenv-
 
       - name: Install dependencies
         if: steps.cache-pipenv.outputs.cache-hit != 'true'
