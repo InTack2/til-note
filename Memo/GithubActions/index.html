@@ -574,6 +574,13 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
+    感想
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
     書き方
   </a>
   
@@ -623,6 +630,13 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
+    感想
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
     書き方
   </a>
   
@@ -652,9 +666,82 @@
                 
                 
                 <h1 id="github-actions">Github Actions<a class="headerlink" href="#github-actions" title="Permanent link">&para;</a></h1>
-<p>このサイトにも使用しているCI/CD</p>
-<h2 id="_1">書き方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><a href="https://docs.github.com/ja/actions/getting-started-with-github-actions/about-github-actions">Github actions</a><br />
+このサイトのビルドにも使用しているCI/CD<br />
+今後OSSで公開などしたライブラリのドキュメントを表示などしたいので、先に用意  </p>
+<h2 id="_1">感想<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>先にやってみた感想としては、<br />
+ちょっとWindowsでやるのは、ローカルでテストしづらく<br />
+構成が完成するまで、プッシュなどを重ねて確認する印象があった。<br />
+publicリポジトリで完全にローカル構築できる方法があれば、印象が変わるかも..<br />
+(private向けだったり、windowsではパスのエラーが起きたりといまいち上手くいかない状態だった。)</p>
+<h2 id="_2">書き方<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>総じてkubernetesなどのもそうだが、構成をyamlで定義している物は<br />
+公式ドキュメントの構文を見ながら一つずつ進めないと全然訳わかめなので<a href="https://docs.github.com/ja/actions/configuring-and-managing-workflows/configuring-a-workflow">公式</a>をお勧めしたい。<br />
+参考に、このサイトのビルドに使用している物を下記に記載。</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>ポイントはCI/CDは高速で回せないといけないので、cacheなども入れて高速化を意識している事。<br />
+Linuxのおかげもあるが、大体このJobでcacheが効いて40秒位</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MkDocs Deploy</span>
+
+<span class="nt">on</span><span class="p">:</span>
+  <span class="nt">push</span><span class="p">:</span>
+    <span class="nt">branches</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
+    <span class="nt">paths</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;docs/**/*.md&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;mkdocs.yml&quot;</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">deploy</span><span class="p">:</span>
+    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+    <span class="nt">steps</span><span class="p">:</span>
+      <span class="c1"># Gitのユーザー設定</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Git config</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+          <span class="no">git config --global user.name &quot;github-actions&quot;</span>
+          <span class="no">git config --global user.email actions@github.com</span>
+
+      <span class="c1"># Git認証</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Checkout</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
+
+      <span class="c1"># Pythonインストール</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Set up Python</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v2</span>
+        <span class="nt">with</span><span class="p">:</span>
+          <span class="nt">python-version</span><span class="p">:</span> <span class="s">&quot;3.8&quot;</span>
+
+      <span class="c1"># pipenvインストール</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install pipenv</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+          <span class="no">pip install pipenv</span>
+
+      <span class="c1"># pipenvのvirtualenvをcache</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cache pipenv virtualenv</span>
+        <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cache-pipenv</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/cache@v1</span>
+        <span class="nt">with</span><span class="p">:</span>
+          <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">~/.local/share/virtualenvs</span>
+          <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ runner.os }}-pipenv-${{ hashFiles(&#39;**/Pipfile.lock&#39;) }}</span>
+
+      <span class="c1"># cacheがなければ、インストール</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+        <span class="nt">if</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">steps.cache-pipenv.outputs.cache-hit != &#39;true&#39;</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pipenv install</span>
+
+      <span class="c1"># MkDocsのデプロイ</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MkDocs deploy</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+          <span class="no">pipenv run mkdocs gh-deploy</span>
+</code></pre></div>
+
 <h2 id="act">act<a class="headerlink" href="#act" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/nektos/act">act</a><br />
+Github Actionをローカルで回す為のテストランナー<br />
+dockerで環境立ててやるので、良さそうではあったのですが、ホストがWindowsだとパスのエラーが起きて上手くいかず<br />
+WSL2だと上手くいったという話があるので、今度試してみるかも。</p>
                 
                   
                     
