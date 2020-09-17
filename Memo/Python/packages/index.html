@@ -550,25 +550,59 @@
     setup.py setup.cfgの作成
   </a>
   
+    <nav class="md-nav" aria-label="setup.py setup.cfgの作成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setuppy" class="md-nav__link">
+    setup.pyの書き方
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setupcfg" class="md-nav__link">
+    setup.cfgの書き方
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#setuppy" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
+    アップロードに必要なパッケージをインストールする
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setuppy_1" class="md-nav__link">
     setup.pyからビルドする
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#setuppy-develop" class="md-nav__link">
-    setup.py develop
+  <a href="#testpypi" class="md-nav__link">
+    testPyPIにアップする
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#cli" class="md-nav__link">
-    CLIコマンドパッケージ
+  <a href="#pypi_1" class="md-nav__link">
+    PyPIにアップする
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考
   </a>
   
 </li>
@@ -692,25 +726,59 @@
     setup.py setup.cfgの作成
   </a>
   
+    <nav class="md-nav" aria-label="setup.py setup.cfgの作成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setuppy" class="md-nav__link">
+    setup.pyの書き方
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setupcfg" class="md-nav__link">
+    setup.cfgの書き方
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#setuppy" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
+    アップロードに必要なパッケージをインストールする
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setuppy_1" class="md-nav__link">
     setup.pyからビルドする
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#setuppy-develop" class="md-nav__link">
-    setup.py develop
+  <a href="#testpypi" class="md-nav__link">
+    testPyPIにアップする
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#cli" class="md-nav__link">
-    CLIコマンドパッケージ
+  <a href="#pypi_1" class="md-nav__link">
+    PyPIにアップする
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考
   </a>
   
 </li>
@@ -736,15 +804,32 @@
 <h2 id="setuppy-setupcfg">setup.py setup.cfgの作成<a class="headerlink" href="#setuppy-setupcfg" title="Permanent link">&para;</a></h2>
 <p>まずパッケージ化に必要な情報をまとめるsetup.pyやcfgを作成します。<br />
 個人的にはsetup.pyだとごちゃっとなるので、  yaml,ini風のcfgの方に移動するのが好みです。  </p>
-<h2 id="setuppy">setup.pyからビルドする<a class="headerlink" href="#setuppy" title="Permanent link">&para;</a></h2>
+<h3 id="setuppy">setup.pyの書き方<a class="headerlink" href="#setuppy" title="Permanent link">&para;</a></h3>
+<p>執筆中  </p>
+<h3 id="setupcfg">setup.cfgの書き方<a class="headerlink" href="#setupcfg" title="Permanent link">&para;</a></h3>
+<p>執筆中  </p>
+<h2 id="_1">アップロードに必要なパッケージをインストールする<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>python -m pip install wheel twine
+</code></pre></div>
+
+<h2 id="setuppy_1">setup.pyからビルドする<a class="headerlink" href="#setuppy_1" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>python setup.py sdist bdist_wheel
 </code></pre></div>
 
-<h2 id="setuppy-develop">setup.py develop<a class="headerlink" href="#setuppy-develop" title="Permanent link">&para;</a></h2>
-<p>https://qiita.com/edvakf@github/items/d82cd7ab77ea2b88506c</p>
-<h2 id="cli">CLIコマンドパッケージ<a class="headerlink" href="#cli" title="Permanent link">&para;</a></h2>
-<p>entry_points
-https://www.karakaram.com/how-to-create-python-cli-package/</p>
+<h2 id="testpypi">testPyPIにアップする<a class="headerlink" href="#testpypi" title="Permanent link">&para;</a></h2>
+<p>まずは直接PyPIにアップするのではなく、Test用のPyPIを推奨。<br />
+<div class="highlight"><pre><span></span><code>twine upload --repository testpypi dist/*
+</code></pre></div></p>
+<h2 id="pypi_1">PyPIにアップする<a class="headerlink" href="#pypi_1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>twine upload --repository pypi dist/*
+</code></pre></div>
+
+<h2 id="_2">参考<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>CLIコマンドパッケージを作る時の参考<br />
+entry_pointsなどなど<br />
+<a href="https://www.karakaram.com/how-to-create-python-cli-package/">https://www.karakaram.com/how-to-create-python-cli-package/</a></li>
+</ul>
                 
                   
                     
