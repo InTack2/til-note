@@ -5,15 +5,35 @@ PythonのモジュールをPyPIにあげるまでに必要なことをまとめ�
 まずパッケージ化に必要な情報をまとめるsetup.pyやcfgを作成します。  
 個人的にはsetup.pyだとごちゃっとなるので、  yaml,ini風のcfgの方に移動するのが好みです。  
 
+### setup.pyの書き方
+執筆中  
+
+### setup.cfgの書き方
+執筆中  
+
+## アップロードに必要なパッケージをインストールする
+``` bash
+python -m pip install wheel twine
+```
+
 ## setup.pyからビルドする
 ``` bash
 python setup.py sdist bdist_wheel
 ```
 
-## setup.py develop
-https://qiita.com/edvakf@github/items/d82cd7ab77ea2b88506c
+## testPyPIにアップする
+まずは直接PyPIにアップするのではなく、Test用のPyPIを推奨。  
+``` bash
+twine upload --repository testpypi dist/*
+```
+
+## PyPIにアップする
+``` bash
+twine upload --repository pypi dist/*
+```
 
 
-## CLIコマンドパッケージ
-entry_points
-https://www.karakaram.com/how-to-create-python-cli-package/
+## 参考
+- CLIコマンドパッケージを作る時の参考  
+entry_pointsなどなど  
+[https://www.karakaram.com/how-to-create-python-cli-package/](https://www.karakaram.com/how-to-create-python-cli-package/)
