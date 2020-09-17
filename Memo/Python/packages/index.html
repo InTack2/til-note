@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
       
-        <link rel="canonical" href="https://intack2.github.io/til-note/Memo/Python/PythonCheatSheet/">
+        <link rel="canonical" href="https://intack2.github.io/til-note/Memo/Python/packages/">
       
       
         <meta name="author" content="InTack2">
@@ -19,7 +19,7 @@
     
     
       
-        <title>PythonCheatSheet - Tack Til Note.</title>
+        <title>PyPIにアップロードするまでに必要なこと - Tack Til Note.</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#script" class="md-skip">
+        <a href="#pypi" class="md-skip">
           コンテンツにスキップ
         </a>
       
@@ -98,7 +98,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              PythonCheatSheet
+              PyPIにアップロードするまでに必要なこと
             
           </span>
         </div>
@@ -501,6 +501,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../PythonCheatSheet/" title="PythonCheatSheet" class="md-nav__link">
+      PythonCheatSheet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -508,19 +520,23 @@
     
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        PythonCheatSheet
+        PyPIにアップロードするまでに必要なこと
         <span class="md-nav__icon md-icon"></span>
       </label>
     
-    <a href="./" title="PythonCheatSheet" class="md-nav__link md-nav__link--active">
-      PythonCheatSheet
+    <a href="./" title="PyPIにアップロードするまでに必要なこと" class="md-nav__link md-nav__link--active">
+      PyPIにアップロードするまでに必要なこと
     </a>
     
       
 <nav class="md-nav md-nav--secondary" aria-label="目次">
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -530,22 +546,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#script" class="md-nav__link">
-    scriptのフォルダを取得する
+  <a href="#setuppy-setupcfg" class="md-nav__link">
+    setup.py setup.cfgの作成
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    可変長引数でアトリビュートに格納する
+  <a href="#setuppy" class="md-nav__link">
+    setup.pyからビルドする
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#cmdsnull" class="md-nav__link">
-    cmds周りのnull回避
+  <a href="#setuppy-develop" class="md-nav__link">
+    setup.py develop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli" class="md-nav__link">
+    CLIコマンドパッケージ
   </a>
   
 </li>
@@ -554,18 +577,6 @@
   
 </nav>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../packages/" title="PyPIにアップロードするまでに必要なこと" class="md-nav__link">
-      PyPIにアップロードするまでに必要なこと
-    </a>
   </li>
 
         
@@ -667,6 +678,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="目次">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -675,22 +688,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#script" class="md-nav__link">
-    scriptのフォルダを取得する
+  <a href="#setuppy-setupcfg" class="md-nav__link">
+    setup.py setup.cfgの作成
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    可変長引数でアトリビュートに格納する
+  <a href="#setuppy" class="md-nav__link">
+    setup.pyからビルドする
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#cmdsnull" class="md-nav__link">
-    cmds周りのnull回避
+  <a href="#setuppy-develop" class="md-nav__link">
+    setup.py develop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli" class="md-nav__link">
+    CLIコマンドパッケージ
   </a>
   
 </li>
@@ -711,26 +731,20 @@
                   
                 
                 
-                  <h1>PythonCheatSheet</h1>
-                
-                <h2 id="script">scriptのフォルダを取得する<a class="headerlink" href="#script" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">script_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+                <h1 id="pypi">PyPIにアップロードするまでに必要なこと<a class="headerlink" href="#pypi" title="Permanent link">&para;</a></h1>
+<p>PythonのモジュールをPyPIにあげるまでに必要なことをまとめます。</p>
+<h2 id="setuppy-setupcfg">setup.py setup.cfgの作成<a class="headerlink" href="#setuppy-setupcfg" title="Permanent link">&para;</a></h2>
+<p>まずパッケージ化に必要な情報をまとめるsetup.pyやcfgを作成します。<br />
+個人的にはsetup.pyだとごちゃっとなるので、  yaml,ini風のcfgの方に移動するのが好みです。  </p>
+<h2 id="setuppy">setup.pyからビルドする<a class="headerlink" href="#setuppy" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>python setup.py sdist bdist_wheel
 </code></pre></div>
 
-<h2 id="_1">可変長引数でアトリビュートに格納する<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Sample</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-</code></pre></div>
-
-<h2 id="cmdsnull">cmds周りのnull回避<a class="headerlink" href="#cmdsnull" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">maya.cmds</span>
-<span class="n">select_object</span> <span class="o">=</span> <span class="n">cmds</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">select</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
-</code></pre></div>
-
-<p>https://speakerdeck.com/twada/write-code-every-day?slide=9</p>
+<h2 id="setuppy-develop">setup.py develop<a class="headerlink" href="#setuppy-develop" title="Permanent link">&para;</a></h2>
+<p>https://qiita.com/edvakf@github/items/d82cd7ab77ea2b88506c</p>
+<h2 id="cli">CLIコマンドパッケージ<a class="headerlink" href="#cli" title="Permanent link">&para;</a></h2>
+<p>entry_points
+https://www.karakaram.com/how-to-create-python-cli-package/</p>
                 
                   
                     
@@ -762,7 +776,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../Cli/" title="Pythonを使ってCLI上で対話的にユーザー入力させる" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../PythonCheatSheet/" title="PythonCheatSheet" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -771,19 +785,19 @@
                 <span class="md-footer-nav__direction">
                   前
                 </span>
-                Pythonを使ってCLI上で対話的にユーザー入力させる
+                PythonCheatSheet
               </div>
             </div>
           </a>
         
         
-          <a href="../packages/" title="PyPIにアップロードするまでに必要なこと" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../PowerShell/" title="PowerShell 7" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   次
                 </span>
-                PyPIにアップロードするまでに必要なこと
+                PowerShell 7
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
