@@ -567,6 +567,47 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#metadata" class="md-nav__link">
+    [metadata]
+  </a>
+  
+    <nav class="md-nav" aria-label="[metadata]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classifiers" class="md-nav__link">
+    classifiers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    [options]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optionspackagesfind" class="md-nav__link">
+    [options.packages.find]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optionsentry_points" class="md-nav__link">
+    [options.entry_points]
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -587,16 +628,29 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#testpypipypi" class="md-nav__link">
+    testPyPI、PyPIに登録する
+  </a>
+  
+    <nav class="md-nav" aria-label="testPyPI、PyPIに登録する">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#testpypi" class="md-nav__link">
-    testPyPIにアップする
+    testPyPI
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#pypi_1" class="md-nav__link">
-    PyPIにアップする
+    PyPI
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -743,6 +797,47 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#metadata" class="md-nav__link">
+    [metadata]
+  </a>
+  
+    <nav class="md-nav" aria-label="[metadata]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classifiers" class="md-nav__link">
+    classifiers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    [options]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optionspackagesfind" class="md-nav__link">
+    [options.packages.find]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optionsentry_points" class="md-nav__link">
+    [options.entry_points]
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -763,16 +858,29 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#testpypipypi" class="md-nav__link">
+    testPyPI、PyPIに登録する
+  </a>
+  
+    <nav class="md-nav" aria-label="testPyPI、PyPIに登録する">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#testpypi" class="md-nav__link">
-    testPyPIにアップする
+    testPyPI
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#pypi_1" class="md-nav__link">
-    PyPIにアップする
+    PyPI
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -805,10 +913,110 @@
 <p>まずパッケージ化に必要な情報をまとめるsetup.pyやcfgを作成します。<br />
 個人的にはsetup.pyだとごちゃっとなるので、  yaml,ini風のcfgの方に移動するのが好みです。  </p>
 <h3 id="setuppy">setup.pyの書き方<a class="headerlink" href="#setuppy" title="Permanent link">&para;</a></h3>
-<p>執筆中  </p>
+<p>実際に個人的に作成しているツールのsetup.pyを参考に。<br />
+基本的に何かPythonでやる必要があるアトリビュート以外は全てcfg側に記載しています。<br />
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">io</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s1">&#39;__version__\s*=\s*[</span><span class="se">\&#39;</span><span class="s1">&quot;]([^</span><span class="se">\&#39;</span><span class="s1">&quot;]*)[</span><span class="se">\&#39;</span><span class="s1">&quot;]&#39;</span><span class="p">,</span>  <span class="c1"># It excludes inline comment too</span>
+    <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;src/boip/__init__.py&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf_8_sig&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Boip&quot;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="n">__version__</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></p>
 <h3 id="setupcfg">setup.cfgの書き方<a class="headerlink" href="#setupcfg" title="Permanent link">&para;</a></h3>
-<p>執筆中  </p>
+<p>長くなりましたが、実際のcodeを記載。<br />
+下にひとつずつ説明を書いていきます。<br />
+<div class="highlight"><pre><span></span><code><span class="k">[metadata]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">boip</span>
+<span class="na">description</span> <span class="o">=</span> <span class="s">A tool for creating Boiler Plates.</span>
+<span class="na">url</span> <span class="o">=</span> <span class="s">https://github.com/InTack2/boip</span>
+<span class="na">author</span> <span class="o">=</span> <span class="s">Tack2</span>
+<span class="na">author_email</span> <span class="o">=</span> <span class="s">takumi236@gmail.com</span>
+<span class="na">license</span> <span class="o">=</span> <span class="s">MIT</span>
+<span class="na">license_file</span> <span class="o">=</span> <span class="s">LICENSE</span>
+<span class="na">long_description</span> <span class="o">=</span> <span class="s">file: README.md</span>
+<span class="na">long_description_content_type</span> <span class="o">=</span> <span class="s">text/markdown</span>
+<span class="na">classifiers</span> <span class="o">=</span><span class="s"></span>
+<span class="s">    Development Status :: 1 - Planning</span>
+<span class="s">    Environment :: Console</span>
+<span class="s">    Intended Audience :: Developers</span>
+<span class="s">    Intended Audience :: Developers</span>
+<span class="s">    License :: OSI Approved :: MIT License</span>
+<span class="s">    Programming Language :: Python :: 2</span>
+<span class="s">    Programming Language :: Python :: 2.7</span>
+<span class="s">    Programming Language :: Python :: 3</span>
+<span class="s">    Programming Language :: Python :: 3.5</span>
+<span class="s">    Programming Language :: Python :: 3.6</span>
+<span class="s">    Programming Language :: Python :: 3.7</span>
+<span class="s">    Programming Language :: Python :: 3.8</span>
+<span class="s">    Operating System :: Microsoft :: Windows :: Windows 10</span>
+<span class="s">    Natural Language :: Japanese</span>
+<span class="na">keywords</span> <span class="o">=</span> <span class="s">PyInquirer, Inquirer, Maya</span>
+<span class="na">project_urls</span> <span class="o">=</span><span class="s"></span>
+<span class="s">    Source=https://github.com/InTack2/boip</span>
+<span class="s">    Tracker=https://github.com/InTack2/boip/issues</span>
+
+<span class="k">[options]</span>
+<span class="na">zip_safe</span> <span class="o">=</span> <span class="s">False</span>
+<span class="na">packages</span> <span class="o">=</span> <span class="s">find:</span>
+<span class="na">package_dir</span> <span class="o">=</span> <span class="s">= src</span>
+<span class="na">include_package_data</span> <span class="o">=</span> <span class="s">true</span>
+<span class="na">python_requires</span> <span class="o">=</span> <span class="s">&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*</span>
+<span class="na">install_requires</span> <span class="o">=</span><span class="s"></span>
+<span class="s">    pyyaml&gt;=5.3.1</span>
+<span class="s">    PyInquirer&gt;=1.0.3</span>
+<span class="na">tests_require</span> <span class="o">=</span><span class="s"></span>
+<span class="s">    pytest</span>
+<span class="s">    tox</span>
+
+<span class="k">[options.packages.find]</span>
+<span class="na">where</span> <span class="o">=</span> <span class="s">src</span>
+
+<span class="k">[aliases]</span>
+<span class="na">test</span><span class="o">=</span><span class="s">pytest</span>
+
+<span class="k">[options.entry_points]</span>
+<span class="na">console_scripts</span> <span class="o">=</span><span class="s"></span>
+<span class="s">    boip = boip.cli:_main</span>
+
+<span class="k">[tool:pytest]</span>
+<span class="na">testpaths</span> <span class="o">=</span> <span class="s">./tests</span>
+<span class="na">python_files</span> <span class="o">=</span> <span class="s">test_*.py</span>
+<span class="na">python_classes</span> <span class="o">=</span> <span class="s">Test</span>
+<span class="na">python_functions</span> <span class="o">=</span> <span class="s">test_</span>
+</code></pre></div></p>
+<h3 id="metadata">[metadata]<a class="headerlink" href="#metadata" title="Permanent link">&para;</a></h3>
+<p>PyPIにアップするときにPyPIに認識させる情報。
+直観的にわかりづらい、これ覚えるの大変という所を記載します。  </p>
+<h4 id="classifiers">classifiers<a class="headerlink" href="#classifiers" title="Permanent link">&para;</a></h4>
+<p>PyPIで検索する時のタグなどを指定します。<br />
+大量にあるので、<a href="https://pypi.org/classifiers/">こちら</a>のサイトがおすすめ。  </p>
+<h3 id="options">[options]<a class="headerlink" href="#options" title="Permanent link">&para;</a></h3>
+<p>インストールする時の設定などを記載。  </p>
+<h3 id="optionspackagesfind">[options.packages.find]<a class="headerlink" href="#optionspackagesfind" title="Permanent link">&para;</a></h3>
+<p>下記のように記載するとsrc以下にある物をパッケージとして認識します。<br />
+<div class="highlight"><pre><span></span><code><span class="k">[options.packages.find]</span>
+<span class="na">where</span> <span class="o">=</span> <span class="s">src</span>
+</code></pre></div></p>
+<h3 id="optionsentry_points">[options.entry_points]<a class="headerlink" href="#optionsentry_points" title="Permanent link">&para;</a></h3>
+<p>エントリーポイントです。<br />
+pytestなどインストールすると<br />
+「python -m pytest」と入力せずとも「pytest」で実行可能になりますが、これがこちらの設定となります。<br />
+下記の例は「boip」と入力するとboip.cliというファイルの_mainを実行するという意味になります。  </p>
+<div class="highlight"><pre><span></span><code><span class="k">[options.entry_points]</span>
+<span class="na">console_scripts</span> <span class="o">=</span><span class="s"></span>
+<span class="s">    boip = boip.cli:_main</span>
+</code></pre></div>
+
 <h2 id="_1">アップロードに必要なパッケージをインストールする<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>wheelはpython2,3系をまとめたパッケージを生成する<br />
+比較的新しい形式のパッケージファイルを生成する為のライブラリ。  </p>
+<p>twineはPyPIにアップする為のライブラリです。  </p>
 <div class="highlight"><pre><span></span><code>python -m pip install wheel twine
 </code></pre></div>
 
@@ -816,12 +1024,27 @@
 <div class="highlight"><pre><span></span><code>python setup.py sdist bdist_wheel
 </code></pre></div>
 
-<h2 id="testpypi">testPyPIにアップする<a class="headerlink" href="#testpypi" title="Permanent link">&para;</a></h2>
-<p>まずは直接PyPIにアップするのではなく、Test用のPyPIを推奨。<br />
+<h2 id="testpypipypi">testPyPI、PyPIに登録する<a class="headerlink" href="#testpypipypi" title="Permanent link">&para;</a></h2>
+<p>両方共ユーザー登録が必要です。<br />
+Pythonコマンドでアップする時にユーザー名とパスワード聞かれます。<br />
+- <a href="https://test.pypi.org/account/register/">testPyPI</a><br />
+- <a href="https://pypi.org/account/register/">PyPI</a>  </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>まずは直接PyPIにアップするのではなく、Test用のPyPIを推奨します。  </p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>PyPI,testPyPI共に、一度アップしたバージョンを再度アップする事はできません。<br />
+アップ後はversionを変更してアップしてください。<br />
+PyPIとtestPyPIは完全に別なので、双方で違っていても問題ありません。  </p>
+</div>
+<h3 id="testpypi">testPyPI<a class="headerlink" href="#testpypi" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>twine upload --repository testpypi dist/*
-</code></pre></div></p>
-<h2 id="pypi_1">PyPIにアップする<a class="headerlink" href="#pypi_1" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>twine upload --repository pypi dist/*
+</code></pre></div>
+
+<h3 id="pypi_1">PyPI<a class="headerlink" href="#pypi_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>twine upload dist/*
 </code></pre></div>
 
 <h2 id="_2">参考<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -838,7 +1061,7 @@ entry_pointsなどなど<br />
 <div class="md-source-date">
   <small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2020年9月17日</span>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2020年9月19日</span>
     
   </small>
 </div>
