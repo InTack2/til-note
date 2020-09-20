@@ -31,6 +31,7 @@ plugins:
   - search # necessary for search to work]
   - awesome-pages
   - git-revision-date-localized
+  - mkdocstrings
 
 markdown_extensions:
   - admonition # アノテーションブロックを有効
