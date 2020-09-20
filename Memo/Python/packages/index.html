@@ -1,936 +1,569 @@
 
+<!DOCTYPE html>
 
-
-<!doctype html>
-<html lang="ja" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-        <link rel="canonical" href="https://intack2.github.io/til-note/Memo/Python/packages/">
-      
-      
-        <meta name="author" content="InTack2">
-      
-      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
-    
-    
-      
-        <title>PyPIにアップロードするまでに必要なこと - Tack Til Note.</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.4dd2dd8d.min.css">
-      
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.6a5ad368.min.css">
-      
-      
-        
-        
-        <meta name="theme-color" content="#2094f3">
-      
-    
-    
-    
-      
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-      
-    
-    
-    
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
-    
-    
-      
-        
+<html class="no-js" lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://intack2.github.io/til-note/Memo/Python/packages/" rel="canonical"/>
+<meta content="InTack2" name="author"/>
+<link href="../../../assets/images/favicon.png" rel="shortcut icon"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.13" name="generator"/>
+<title>PyPIにアップロードするまでに必要なこと - Tack Til Note.</title>
+<link href="../../../assets/stylesheets/main.077507d7.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.ff0a5ce4.min.css" rel="stylesheet"/>
+<meta content="#2094f3" name="theme-color"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="../../../stylesheets/extra.css" rel="stylesheet"/>
 <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-165693276-2","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
-<script async src="https://www.google-analytics.com/analytics.js"></script>
-      
-    
-    
-  </head>
-  
-  
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#pypi" class="md-skip">
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+</head>
+<body data-md-color-accent="blue" data-md-color-primary="blue" data-md-color-scheme="slate" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#pypi">
           コンテンツにスキップ
         </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-      <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="https://intack2.github.io/til-note/" title="Tack Til Note." class="md-header-nav__button md-logo" aria-label="Tack Til Note.">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
-
-    </a>
-    <label class="md-header-nav__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
-    </label>
-    <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header-nav md-grid">
+<a aria-label="Tack Til Note." class="md-header-nav__button md-logo" href="https://intack2.github.io/til-note/" title="Tack Til Note.">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header-nav__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header-nav__title" data-md-component="header-title">
+<div class="md-header-nav__ellipsis">
+<span class="md-header-nav__topic md-ellipsis">
             Tack Til Note.
           </span>
-          <span class="md-header-nav__topic md-ellipsis">
+<span class="md-header-nav__topic md-ellipsis">
             
               PyPIにアップロードするまでに必要なこと
             
           </span>
-        </div>
-      
-    </div>
-    
-      <label class="md-header-nav__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-      </label>
-      
+</div>
+</div>
+<label class="md-header-nav__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
 <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="検索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="検索" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<button aria-label="Clear" class="md-search__icon md-icon" data-md-component="search-reset" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+<ol class="md-search-result__list"></ol>
 </div>
-    
-    
-      <div class="md-header-nav__source">
-        
-<a href="https://github.com/InTack2/til-note" title="リポジトリへ" class="md-source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
-  </div>
-  <div class="md-source__repository">
+</div>
+</div>
+</div>
+</div>
+<div class="md-header-nav__source">
+<a class="md-source" href="https://github.com/InTack2/til-note" title="リポジトリへ">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
     InTack2/til-note
   </div>
 </a>
-      </div>
-    
-  </nav>
+</div>
+</nav>
 </header>
-    
-    <div class="md-container" data-md-component="container">
-      
-        
-      
-      
-        
-          
-
-  
-
-<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  <li class="md-tabs__item">
-    
-      <a href="../../.." class="md-tabs__link">
+<div class="md-container" data-md-component="container">
+<nav aria-label="Tabs" class="md-tabs md-tabs--active" data-md-component="tabs">
+<div class="md-tabs__inner md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../..">
         このサイトについて
       </a>
-    
-  </li>
-
-      
-        
-  
-  
-    <li class="md-tabs__item">
-      
-        <a href="../../../VSCode/MayaDevelopment/" class="md-tabs__link">
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../VSCode/MayaDevelopment/">
           VSCode
         </a>
-      
-    </li>
-  
-
-      
-        
-  
-  
-    <li class="md-tabs__item">
-      
-        <a href="../../../Maya/" class="md-tabs__link">
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../Maya/">
           Maya
         </a>
-      
-    </li>
-  
-
-      
-        
-  
-  
-    <li class="md-tabs__item">
-      
-        <a href="../../" class="md-tabs__link md-tabs__link--active">
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href="../../">
           Memo
         </a>
-      
-    </li>
-  
-
-      
-    </ul>
-  </div>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../Module/">
+          Module
+        </a>
+</li>
+</ul>
+</div>
 </nav>
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="https://intack2.github.io/til-note/" title="Tack Til Note." class="md-nav__button md-logo" aria-label="Tack Til Note.">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
-
-    </a>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Tack Til Note." class="md-nav__button md-logo" href="https://intack2.github.io/til-note/" title="Tack Til Note.">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
     Tack Til Note.
   </label>
-  
-    <div class="md-nav__source">
-      
-<a href="https://github.com/InTack2/til-note" title="リポジトリへ" class="md-source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
-  </div>
-  <div class="md-source__repository">
+<div class="md-nav__source">
+<a class="md-source" href="https://github.com/InTack2/til-note" title="リポジトリへ">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
     InTack2/til-note
   </div>
 </a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../.." title="このサイトについて" class="md-nav__link">
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../.." title="このサイトについて">
       このサイトについて
     </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
-    
-    <label class="md-nav__link" for="nav-2">
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
+<label class="md-nav__link" for="nav-2">
       VSCode
       <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="VSCode" data-md-level="1">
-      <label class="md-nav__title" for="nav-2">
-        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="VSCode" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="nav-2">
+<span class="md-nav__icon md-icon"></span>
         VSCode
       </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../../VSCode/MayaDevelopment/" title="Maya用開発情報" class="md-nav__link">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../VSCode/MayaDevelopment/" title="Maya用開発情報">
       Maya用開発情報
     </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
-    
-    <label class="md-nav__link" for="nav-2-2">
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-2" id="nav-2-2" type="checkbox"/>
+<label class="md-nav__link" for="nav-2-2">
       拡張機能
       <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="拡張機能" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-2">
-        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="拡張機能" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="nav-2-2">
+<span class="md-nav__icon md-icon"></span>
         拡張機能
       </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../../VSCode/%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD/Intro/" title="はじめに" class="md-nav__link">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../VSCode/%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD/Intro/" title="はじめに">
       はじめに
     </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../../VSCode/%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD/Extension/" title="開発する" class="md-nav__link">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../VSCode/%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD/Extension/" title="開発する">
       開発する
     </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
-    
-    <label class="md-nav__link" for="nav-3">
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" id="nav-3" type="checkbox"/>
+<label class="md-nav__link" for="nav-3">
       Maya
       <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Maya" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Maya" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="nav-3">
+<span class="md-nav__icon md-icon"></span>
         Maya
       </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../../Maya/" title="はじめに" class="md-nav__link">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../Maya/" title="はじめに">
       はじめに
     </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../../Maya/English/" title="OSの言語に関係なく、別言語で利用する。" class="md-nav__link">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../Maya/English/" title="OSの言語に関係なく、別言語で利用する。">
       OSの言語に関係なく、別言語で利用する。
     </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../../Maya/Site-Packages/" title="Maya環境は汚さずにPythonライブラリを使用する。" class="md-nav__link">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../Maya/Site-Packages/" title="Maya環境は汚さずにPythonライブラリを使用する。">
       Maya環境は汚さずにPythonライブラリを使用する。
     </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../../Maya/tox/" title="テスト駆動開発でバージョンアップを優雅に完了する" class="md-nav__link">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../Maya/tox/" title="テスト駆動開発でバージョンアップを優雅に完了する">
       テスト駆動開発でバージョンアップを優雅に完了する
     </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
-    
-    <label class="md-nav__link" for="nav-4">
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="nav-4" id="nav-4" type="checkbox"/>
+<label class="md-nav__link" for="nav-4">
       Memo
       <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Memo" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Memo" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="nav-4">
+<span class="md-nav__icon md-icon"></span>
         Memo
       </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../" title="Index" class="md-nav__link">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../" title="Index">
       Index
     </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2" checked>
-    
-    <label class="md-nav__link" for="nav-4-2">
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="nav-4-2" id="nav-4-2" type="checkbox"/>
+<label class="md-nav__link" for="nav-4-2">
       Python
       <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Python" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-2">
-        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Python" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="nav-4-2">
+<span class="md-nav__icon md-icon"></span>
         Python
       </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Cli/" title="Pythonを使ってCLI上で対話的にユーザー入力させる" class="md-nav__link">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Cli/" title="Pythonを使ってCLI上で対話的にユーザー入力させる">
       Pythonを使ってCLI上で対話的にユーザー入力させる
     </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../PythonCheatSheet/" title="PythonCheatSheet" class="md-nav__link">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../PythonCheatSheet/" title="PythonCheatSheet">
       PythonCheatSheet
     </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
         PyPIにアップロードするまでに必要なこと
         <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" title="PyPIにアップロードするまでに必要なこと" class="md-nav__link md-nav__link--active">
+</label>
+<a class="md-nav__link md-nav__link--active" href="./" title="PyPIにアップロードするまでに必要なこと">
       PyPIにアップロードするまでに必要なこと
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="目次">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+<nav aria-label="目次" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       目次
     </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#setuppy-setupcfg" class="md-nav__link">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setuppy-setupcfg">
     setup.py setup.cfgの作成
   </a>
-  
-    <nav class="md-nav" aria-label="setup.py setup.cfgの作成">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#setuppy" class="md-nav__link">
+<nav aria-label="setup.py setup.cfgの作成" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setuppy">
     setup.pyの書き方
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#setupcfg" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setupcfg">
     setup.cfgの書き方
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#metadata" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#metadata">
     [metadata]
   </a>
-  
-    <nav class="md-nav" aria-label="[metadata]">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#classifiers" class="md-nav__link">
+<nav aria-label="[metadata]" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#classifiers">
     classifiers
   </a>
-  
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#options" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#options">
     [options]
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#optionspackagesfind" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#optionspackagesfind">
     [options.packages.find]
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#optionsentry_points" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#optionsentry_points">
     [options.entry_points]
   </a>
-  
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
     アップロードに必要なパッケージをインストールする
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#setuppy_1" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setuppy_1">
     setup.pyからビルドする
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#testpypipypi" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#testpypipypi">
     testPyPI、PyPIに登録する
   </a>
-  
-    <nav class="md-nav" aria-label="testPyPI、PyPIに登録する">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#testpypi" class="md-nav__link">
+<nav aria-label="testPyPI、PyPIに登録する" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#testpypi">
     testPyPI
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#pypi_1" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pypi_1">
     PyPI
   </a>
-  
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
     参考
   </a>
-  
 </li>
-      
-    </ul>
-  
+</ul>
 </nav>
-    
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../PowerShell/" title="PowerShell 7" class="md-nav__link">
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../PowerShell/" title="PowerShell 7">
       PowerShell 7
     </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../MkDocs/" title="MkDocs" class="md-nav__link">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../MkDocs/" title="MkDocs">
       MkDocs
     </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../GithubActions/" title="Github Actions" class="md-nav__link">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../GithubActions/" title="Github Actions">
       Github Actions
     </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
-    
-    <label class="md-nav__link" for="nav-4-6">
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-6" id="nav-4-6" type="checkbox"/>
+<label class="md-nav__link" for="nav-4-6">
       C C++
       <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="C C++" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-6">
-        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="C C++" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="nav-4-6">
+<span class="md-nav__icon md-icon"></span>
         C C++
       </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../C_C%2B%2B/Glossary/" title="用語集" class="md-nav__link">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../C_C%2B%2B/Glossary/" title="用語集">
       用語集
     </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-  </ul>
+</li>
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="目次">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" id="nav-5" type="checkbox"/>
+<label class="md-nav__link" for="nav-5">
+      Module
       <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Module" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="nav-5">
+<span class="md-nav__icon md-icon"></span>
+        Module
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../Module/" title="Index">
+      Index
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../Module/boip/" title="Boip">
+      Boip
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="目次" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       目次
     </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#setuppy-setupcfg" class="md-nav__link">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setuppy-setupcfg">
     setup.py setup.cfgの作成
   </a>
-  
-    <nav class="md-nav" aria-label="setup.py setup.cfgの作成">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#setuppy" class="md-nav__link">
+<nav aria-label="setup.py setup.cfgの作成" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setuppy">
     setup.pyの書き方
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#setupcfg" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setupcfg">
     setup.cfgの書き方
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#metadata" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#metadata">
     [metadata]
   </a>
-  
-    <nav class="md-nav" aria-label="[metadata]">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#classifiers" class="md-nav__link">
+<nav aria-label="[metadata]" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#classifiers">
     classifiers
   </a>
-  
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#options" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#options">
     [options]
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#optionspackagesfind" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#optionspackagesfind">
     [options.packages.find]
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#optionsentry_points" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#optionsentry_points">
     [options.entry_points]
   </a>
-  
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
     アップロードに必要なパッケージをインストールする
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#setuppy_1" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setuppy_1">
     setup.pyからビルドする
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#testpypipypi" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#testpypipypi">
     testPyPI、PyPIに登録する
   </a>
-  
-    <nav class="md-nav" aria-label="testPyPI、PyPIに登録する">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#testpypi" class="md-nav__link">
+<nav aria-label="testPyPI、PyPIに登録する" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#testpypi">
     testPyPI
   </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#pypi_1" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pypi_1">
     PyPI
   </a>
-  
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
     参考
   </a>
-  
 </li>
-      
-    </ul>
-  
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
-              
-                
-                
-                  
-                
-                
-                <h1 id="pypi">PyPIにアップロードするまでに必要なこと<a class="headerlink" href="#pypi" title="Permanent link">&para;</a></h1>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<h1 id="pypi">PyPIにアップロードするまでに必要なこと<a class="headerlink" href="#pypi" title="Permanent link">¶</a></h1>
 <p>PythonのモジュールをPyPIにあげるまでに必要なことをまとめます。</p>
-<h2 id="setuppy-setupcfg">setup.py setup.cfgの作成<a class="headerlink" href="#setuppy-setupcfg" title="Permanent link">&para;</a></h2>
-<p>まずパッケージ化に必要な情報をまとめるsetup.pyやcfgを作成します。<br />
+<h2 id="setuppy-setupcfg">setup.py setup.cfgの作成<a class="headerlink" href="#setuppy-setupcfg" title="Permanent link">¶</a></h2>
+<p>まずパッケージ化に必要な情報をまとめるsetup.pyやcfgを作成します。<br/>
 個人的にはsetup.pyだとごちゃっとなるので、  yaml,ini風のcfgの方に移動するのが好みです。  </p>
-<h3 id="setuppy">setup.pyの書き方<a class="headerlink" href="#setuppy" title="Permanent link">&para;</a></h3>
-<p>実際に個人的に作成しているツールのsetup.pyを参考に。<br />
-基本的に何かPythonでやる必要があるアトリビュート以外は全てcfg側に記載しています。<br />
+<h3 id="setuppy">setup.pyの書き方<a class="headerlink" href="#setuppy" title="Permanent link">¶</a></h3>
+<p>実際に個人的に作成しているツールのsetup.pyを参考に。<br/>
+基本的に何かPythonでやる必要があるアトリビュート以外は全てcfg側に記載しています。<br/>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">io</span>
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
-    <span class="sa">r</span><span class="s1">&#39;__version__\s*=\s*[</span><span class="se">\&#39;</span><span class="s1">&quot;]([^</span><span class="se">\&#39;</span><span class="s1">&quot;]*)[</span><span class="se">\&#39;</span><span class="s1">&quot;]&#39;</span><span class="p">,</span>  <span class="c1"># It excludes inline comment too</span>
-    <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;src/boip/__init__.py&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf_8_sig&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="sa">r</span><span class="s1">'__version__\s*=\s*[</span><span class="se">\'</span><span class="s1">"]([^</span><span class="se">\'</span><span class="s1">"]*)[</span><span class="se">\'</span><span class="s1">"]'</span><span class="p">,</span>  <span class="c1"># It excludes inline comment too</span>
+    <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'src/boip/__init__.py'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf_8_sig'</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">setup</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Boip&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"Boip"</span><span class="p">,</span>
     <span class="n">version</span><span class="o">=</span><span class="n">__version__</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div></p>
-<h3 id="setupcfg">setup.cfgの書き方<a class="headerlink" href="#setupcfg" title="Permanent link">&para;</a></h3>
-<p>長くなりましたが、実際のcodeを記載。<br />
-下にひとつずつ説明を書いていきます。<br />
+<h3 id="setupcfg">setup.cfgの書き方<a class="headerlink" href="#setupcfg" title="Permanent link">¶</a></h3>
+<p>長くなりましたが、実際のcodeを記載。<br/>
+下にひとつずつ説明を書いていきます。<br/>
 <div class="highlight"><pre><span></span><code><span class="k">[metadata]</span>
 <span class="na">name</span> <span class="o">=</span> <span class="s">boip</span>
 <span class="na">description</span> <span class="o">=</span> <span class="s">A tool for creating Boiler Plates.</span>
@@ -990,185 +623,138 @@
 <span class="na">python_classes</span> <span class="o">=</span> <span class="s">Test</span>
 <span class="na">python_functions</span> <span class="o">=</span> <span class="s">test_</span>
 </code></pre></div></p>
-<h3 id="metadata">[metadata]<a class="headerlink" href="#metadata" title="Permanent link">&para;</a></h3>
+<h3 id="metadata">[metadata]<a class="headerlink" href="#metadata" title="Permanent link">¶</a></h3>
 <p>PyPIにアップするときにPyPIに認識させる情報。
 直観的にわかりづらい、これ覚えるの大変という所を記載します。  </p>
-<h4 id="classifiers">classifiers<a class="headerlink" href="#classifiers" title="Permanent link">&para;</a></h4>
-<p>PyPIで検索する時のタグなどを指定します。<br />
+<h4 id="classifiers">classifiers<a class="headerlink" href="#classifiers" title="Permanent link">¶</a></h4>
+<p>PyPIで検索する時のタグなどを指定します。<br/>
 大量にあるので、<a href="https://pypi.org/classifiers/">こちら</a>のサイトがおすすめ。  </p>
-<h3 id="options">[options]<a class="headerlink" href="#options" title="Permanent link">&para;</a></h3>
+<h3 id="options">[options]<a class="headerlink" href="#options" title="Permanent link">¶</a></h3>
 <p>インストールする時の設定などを記載。  </p>
-<h3 id="optionspackagesfind">[options.packages.find]<a class="headerlink" href="#optionspackagesfind" title="Permanent link">&para;</a></h3>
-<p>下記のように記載するとsrc以下にある物をパッケージとして認識します。<br />
+<h3 id="optionspackagesfind">[options.packages.find]<a class="headerlink" href="#optionspackagesfind" title="Permanent link">¶</a></h3>
+<p>下記のように記載するとsrc以下にある物をパッケージとして認識します。<br/>
 <div class="highlight"><pre><span></span><code><span class="k">[options.packages.find]</span>
 <span class="na">where</span> <span class="o">=</span> <span class="s">src</span>
 </code></pre></div></p>
-<h3 id="optionsentry_points">[options.entry_points]<a class="headerlink" href="#optionsentry_points" title="Permanent link">&para;</a></h3>
-<p>エントリーポイントです。<br />
-pytestなどインストールすると<br />
-「python -m pytest」と入力せずとも「pytest」で実行可能になりますが、これがこちらの設定となります。<br />
+<h3 id="optionsentry_points">[options.entry_points]<a class="headerlink" href="#optionsentry_points" title="Permanent link">¶</a></h3>
+<p>エントリーポイントです。<br/>
+pytestなどインストールすると<br/>
+「python -m pytest」と入力せずとも「pytest」で実行可能になりますが、これがこちらの設定となります。<br/>
 下記の例は「boip」と入力するとboip.cliというファイルの_mainを実行するという意味になります。  </p>
 <div class="highlight"><pre><span></span><code><span class="k">[options.entry_points]</span>
 <span class="na">console_scripts</span> <span class="o">=</span><span class="s"></span>
 <span class="s">    boip = boip.cli:_main</span>
 </code></pre></div>
-
-<h2 id="_1">アップロードに必要なパッケージをインストールする<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>wheelはpython2,3系をまとめたパッケージを生成する<br />
+<h2 id="_1">アップロードに必要なパッケージをインストールする<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<p>wheelはpython2,3系をまとめたパッケージを生成する<br/>
 比較的新しい形式のパッケージファイルを生成する為のライブラリ。  </p>
 <p>twineはPyPIにアップする為のライブラリです。  </p>
 <div class="highlight"><pre><span></span><code>python -m pip install wheel twine
 </code></pre></div>
-
-<h2 id="setuppy_1">setup.pyからビルドする<a class="headerlink" href="#setuppy_1" title="Permanent link">&para;</a></h2>
+<h2 id="setuppy_1">setup.pyからビルドする<a class="headerlink" href="#setuppy_1" title="Permanent link">¶</a></h2>
 <div class="highlight"><pre><span></span><code>python setup.py sdist bdist_wheel
 </code></pre></div>
-
-<h2 id="testpypipypi">testPyPI、PyPIに登録する<a class="headerlink" href="#testpypipypi" title="Permanent link">&para;</a></h2>
-<p>両方共ユーザー登録が必要です。<br />
-Pythonコマンドでアップする時にユーザー名とパスワード聞かれます。<br />
-- <a href="https://test.pypi.org/account/register/">testPyPI</a><br />
-- <a href="https://pypi.org/account/register/">PyPI</a>  </p>
+<h2 id="testpypipypi">testPyPI、PyPIに登録する<a class="headerlink" href="#testpypipypi" title="Permanent link">¶</a></h2>
+<p>両方共ユーザー登録が必要です。<br/>
+Pythonコマンドでアップする時にユーザー名とパスワード聞かれます。<br/>
+- <a href="https://test.pypi.org/account/register/">testPyPI</a><br/>
+- <a href="https://pypi.org/account/register/">PyPI</a> </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>まずは直接PyPIにアップするのではなく、Test用のPyPIを推奨します。  </p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>PyPI,testPyPI共に、一度アップしたバージョンを再度アップする事はできません。<br />
-アップ後はversionを変更してアップしてください。<br />
+<p>PyPI,testPyPI共に、一度アップしたバージョンを再度アップする事はできません。<br/>
+アップ後はversionを変更してアップしてください。<br/>
 PyPIとtestPyPIは完全に別なので、双方で違っていても問題ありません。  </p>
 </div>
-<h3 id="testpypi">testPyPI<a class="headerlink" href="#testpypi" title="Permanent link">&para;</a></h3>
+<h3 id="testpypi">testPyPI<a class="headerlink" href="#testpypi" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code>twine upload --repository testpypi dist/*
 </code></pre></div>
-
-<h3 id="pypi_1">PyPI<a class="headerlink" href="#pypi_1" title="Permanent link">&para;</a></h3>
+<h3 id="pypi_1">PyPI<a class="headerlink" href="#pypi_1" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code>twine upload dist/*
 </code></pre></div>
-
-<h2 id="_2">参考<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_2">参考<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
 <ul>
-<li>CLIコマンドパッケージを作る時の参考<br />
-entry_pointsなどなど<br />
+<li>CLIコマンドパッケージを作る時の参考<br/>
+entry_pointsなどなど<br/>
 <a href="https://www.karakaram.com/how-to-create-python-cli-package/">https://www.karakaram.com/how-to-create-python-cli-package/</a></li>
 </ul>
-                
-                  
-                    
-
-<hr>
+<hr/>
 <div class="md-source-date">
-  <small>
+<small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2020年9月19日</span>
-    
-  </small>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2020年9月20日</span>
+</small>
 </div>
-                  
-                
-              
-              
-                
-
-
-              
-            </article>
-          </div>
-        </div>
-      </main>
-      
-        
+</article>
+</div>
+</div>
+</main>
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
-        
-          <a href="../PythonCheatSheet/" title="PythonCheatSheet" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-            </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
+<div class="md-footer-nav">
+<nav aria-label="Footer" class="md-footer-nav__inner md-grid">
+<a class="md-footer-nav__link md-footer-nav__link--prev" href="../PythonCheatSheet/" rel="prev" title="PythonCheatSheet">
+<div class="md-footer-nav__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer-nav__title">
+<div class="md-ellipsis">
+<span class="md-footer-nav__direction">
                   前
                 </span>
                 PythonCheatSheet
               </div>
-            </div>
-          </a>
-        
-        
-          <a href="../../PowerShell/" title="PowerShell 7" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
+</div>
+</a>
+<a class="md-footer-nav__link md-footer-nav__link--next" href="../../PowerShell/" rel="next" title="PowerShell 7">
+<div class="md-footer-nav__title">
+<div class="md-ellipsis">
+<span class="md-footer-nav__direction">
                   次
                 </span>
                 PowerShell 7
               </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
+</div>
+<div class="md-footer-nav__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+</div>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
         
         Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
           Material for MkDocs
         </a>
-      </div>
-      
-  <div class="md-footer-social">
-    
-      
-      
-        
-        
-      
-      <a href="https://github.com/InTack2" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
-      </a>
-    
-      
-      
-        
-        
-      
-      <a href="https://twitter.com/Tack2_3D" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
-      </a>
-    
-  </div>
-
-    </div>
-  </div>
+</div>
+<div class="md-footer-social">
+<a class="md-footer-social__link" href="https://github.com/InTack2" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 480 512" xmlns="http://www.w3.org/2000/svg"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"></path></svg>
+</a>
+<a class="md-footer-social__link" href="https://twitter.com/Tack2_3D" rel="noopener" target="_blank" title="twitter.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+</a>
+</div>
+</div>
+</div>
 </footer>
-      
-    </div>
-    
-      <script src="../../../assets/javascripts/vendor.3636a4ec.min.js"></script>
-      <script src="../../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f"}</script>
-      
-      <script>
+</div>
+<script src="../../../assets/javascripts/vendor.2d1db4bd.min.js"></script>
+<script src="../../../assets/javascripts/bundle.6627ddf3.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f"}</script>
+<script>
         app = initialize({
           base: "../../..",
-          features: ["tabs", "instant"],
+          features: ['tabs', 'instant'],
           search: Object.assign({
             worker: "../../../assets/javascripts/worker/search.5eca75d3.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
-      
-        <script src="../../../javascripts/extra.js"></script>
-      
-    
-  </body>
+<script src="../../../javascripts/extra.js"></script>
+</body>
 </html>
