@@ -530,7 +530,9 @@ CMakeはその問題を解消すべく、専用の宣言ファイルを元にビ
 <h3 id="findmayacmake">FindMaya.cmake<a class="headerlink" href="#findmayacmake" title="Permanent link">¶</a></h3>
 <p>Maya用にCMakeモジュールを作成する。<br/>
 Mayaバージョンの指定、OSごとに拡張子の変更、読み込む内容の変更の分岐を記載する。<br/>
-のちほどコメント追加予定。<br/>
+のちほどコメント追加予定。  </p>
+<div class="admonition example">
+<p class="admonition-title">FindMaya.cmake</p>
 <div class="highlight"><pre><span></span><code><span class="cp"># Set a default Maya version if not specified</span>
 <span class="k">if</span><span class="p">(</span><span class="n">NOT</span> <span class="n">DEFINED</span> <span class="n">MAYA_VERSION</span><span class="p">)</span>
     <span class="n">set</span><span class="p">(</span><span class="n">MAYA_VERSION</span> <span class="mi">2020</span> <span class="n">CACHE</span> <span class="n">STRING</span> <span class="s">"Maya version"</span><span class="p">)</span>
@@ -642,8 +644,11 @@ Mayaバージョンの指定、OSごとに拡張子の変更、読み込む内�
         <span class="n">PREFIX</span> <span class="s">""</span>
         <span class="n">SUFFIX</span> <span class="n">$</span><span class="p">{</span><span class="n">MAYA_PLUGIN_EXTENSION</span><span class="p">})</span>
 <span class="n">endfunction</span><span class="p">()</span>
-</code></pre></div></p>
+</code></pre></div>
+</div>
 <h3 id="cmakeliststxt1">CMakeLists.txt(1個目)<a class="headerlink" href="#cmakeliststxt1" title="Permanent link">¶</a></h3>
+<div class="admonition example">
+<p class="admonition-title">CMakeLists.txt</p>
 <div class="highlight"><pre><span></span><code><span class="n">cmake_minimum_required</span><span class="p">(</span><span class="n">VERSION</span> <span class="mf">2.8</span><span class="p">)</span>
 <span class="cp"># specify project name</span>
 <span class="n">set</span><span class="p">(</span><span class="n">PROJECT_NAME</span> <span class="n">helloWorldCmd</span><span class="p">)</span>
@@ -652,10 +657,13 @@ Mayaバージョンの指定、OSごとに拡張子の変更、読み込む内�
 <span class="n">set_property</span><span class="p">(</span><span class="n">DIRECTORY</span> <span class="n">$</span><span class="p">{</span><span class="n">CMAKE_CURRENT_SOURCE_DIR</span><span class="p">}</span> <span class="n">PROPERTY</span> <span class="n">VS_STARTUP_PROJECT</span> <span class="n">$</span><span class="p">{</span><span class="n">PROJECT_NAME</span><span class="p">})</span>
 <span class="n">add_subdirectory</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
 </code></pre></div>
+</div>
 <h3 id="cmakeliststxt2">CMakeLists.txt(2個目)<a class="headerlink" href="#cmakeliststxt2" title="Permanent link">¶</a></h3>
+<div class="admonition example">
+<p class="admonition-title">CMakeLists.txt</p>
 <div class="highlight"><pre><span></span><code><span class="cp"># set SOURCE_FILES</span>
 <span class="n">set</span><span class="p">(</span><span class="n">SOURCE_FILES</span>
-   <span class="n">helloWorldCmd</span><span class="p">.</span><span class="n">cpp</span>
+<span class="n">helloWorldCmd</span><span class="p">.</span><span class="n">cpp</span>
 <span class="p">)</span>
 
 <span class="n">find_package</span><span class="p">(</span><span class="n">Maya</span> <span class="n">REQUIRED</span><span class="p">)</span>
@@ -671,6 +679,7 @@ Mayaバージョンの指定、OSごとに拡張子の変更、読み込む内�
 
 <span class="n">MAYA_PLUGIN</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">PROJECT_NAME</span><span class="p">})</span>
 </code></pre></div>
+</div>
 <h2 id="cmake_1">CMakeコマンド<a class="headerlink" href="#cmake_1" title="Permanent link">¶</a></h2>
 <h3 id="visual-studio2019">Visual Studio2019の構成を作成<a class="headerlink" href="#visual-studio2019" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> build
@@ -691,7 +700,7 @@ cmake --build . --config Release
 <div class="md-source-date">
 <small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2020年9月20日</span>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2020年9月21日</span>
 </small>
 </div>
 </article>
