@@ -416,8 +416,38 @@
     ある形状に欠けを追加する
   </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_7">
+    それっぽい砂地を作る
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_8">
+    風を追加する
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2">
+    風その2(形状に合わせるならこちらが楽そう)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_9">
+    地割れ模様を作る
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_10">
+    地割れ模様にランダム感を足す
+  </a>
+</li>
 </ul>
 </nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Reference/" title="Reference">
+      Reference
+    </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../nodes/" title="既存ノードメモ">
@@ -499,6 +529,31 @@
     ある形状に欠けを追加する
   </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_7">
+    それっぽい砂地を作る
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_8">
+    風を追加する
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2">
+    風その2(形状に合わせるならこちらが楽そう)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_9">
+    地割れ模様を作る
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_10">
+    地割れ模様にランダム感を足す
+  </a>
+</li>
 </ul>
 </nav>
 </div>
@@ -524,11 +579,30 @@ Thresholdで取得する。<br/>
 <p><a href="https://gyazo.com/4370a78fe0258de0627d15e743a0dd76"><img alt="Image from Gyazo" src="https://i.gyazo.com/4370a78fe0258de0627d15e743a0dd76.png"/></a></p>
 <h2 id="_6">ある形状に欠けを追加する<a class="headerlink" href="#_6" title="Permanent link">¶</a></h2>
 <p>何か規則的な建築パターンなどの輪郭に欠けを追加したりで便利そう。  </p>
+<h2 id="_7">それっぽい砂地を作る<a class="headerlink" href="#_7" title="Permanent link">¶</a></h2>
+<p><a href="https://gyazo.com/c33f282c5a85f2568df4fbe12041fd54"><img alt="Image from Gyazo" src="https://i.gyazo.com/c33f282c5a85f2568df4fbe12041fd54.png"/></a></p>
+<h2 id="_8">風を追加する<a class="headerlink" href="#_8" title="Permanent link">¶</a></h2>
+<p>Directional scratchesを引き延ばし、VectorWarpで歪ませる<br/>
+そして、それをSlope情報としてSlope Blur Grayscaleに接続する。<br/>
+VectorMapは法線などでも可  </p>
+<p><a href="https://gyazo.com/b6be1a0ac90fc7d3078e4350bfa5a6ea"><img alt="Image from Gyazo" src="https://i.gyazo.com/b6be1a0ac90fc7d3078e4350bfa5a6ea.gif"/></a></p>
+<h2 id="2">風その2(形状に合わせるならこちらが楽そう)<a class="headerlink" href="#2" title="Permanent link">¶</a></h2>
+<p>スクラッチで作った線にガウスノイズでワープで変形して少しランダム感を出す
+そしてそれをVectorWarpで形状に添わせる。<br/>
+例えば頂上近くは必要ないなどあればHistogram　SelectなどでマスクしてNon uniform blurなどでブラーをかけて目立たなくさせる。
+Non uniform blurを使わなくても普通にかけたくない所をマスクしても見た目に差異はなし。  </p>
+<p><a href="https://gyazo.com/3156675ea553b9a8040f8d3fcf48599d"><img alt="Image from Gyazo" src="https://i.gyazo.com/3156675ea553b9a8040f8d3fcf48599d.png"/></a></p>
+<h2 id="_9">地割れ模様を作る<a class="headerlink" href="#_9" title="Permanent link">¶</a></h2>
+<p>Tile Randomでほとんど形状を作り、Edge Detectで境界線を抽出。<br/>
+Edge Detectの結果で境界線を出力できるので、かなり応用が効く。  </p>
+<p><a href="https://gyazo.com/b0276a7cbf6ae02e829df704fd9589a1"><img alt="Image from Gyazo" src="https://i.gyazo.com/b0276a7cbf6ae02e829df704fd9589a1.png"/></a></p>
+<h2 id="_10">地割れ模様にランダム感を足す<a class="headerlink" href="#_10" title="Permanent link">¶</a></h2>
+<p><a href="https://gyazo.com/d2c48f0841db6ccfb51dfe75ebf11d5c"><img alt="Image from Gyazo" src="https://i.gyazo.com/d2c48f0841db6ccfb51dfe75ebf11d5c.png"/></a></p>
 <hr/>
 <div class="md-source-date">
 <small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2020年10月27日</span>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2020年10月29日</span>
 </small>
 </div>
 </article>
@@ -551,13 +625,13 @@ Thresholdで取得する。<br/>
               </div>
 </div>
 </a>
-<a class="md-footer-nav__link md-footer-nav__link--next" href="../nodes/" rel="next" title="既存ノードメモ">
+<a class="md-footer-nav__link md-footer-nav__link--next" href="../Reference/" rel="next" title="Reference">
 <div class="md-footer-nav__title">
 <div class="md-ellipsis">
 <span class="md-footer-nav__direction">
                   次
                 </span>
-                既存ノードメモ
+                Reference
               </div>
 </div>
 <div class="md-footer-nav__button md-icon">
