@@ -24,3 +24,34 @@ Flood Fillとそれに関連するノードを使用する。
 ## ある形状に欠けを追加する
 何か規則的な建築パターンなどの輪郭に欠けを追加したりで便利そう。  
 
+## それっぽい砂地を作る
+[![Image from Gyazo](https://i.gyazo.com/c33f282c5a85f2568df4fbe12041fd54.png)](https://gyazo.com/c33f282c5a85f2568df4fbe12041fd54)
+
+
+## 風を追加する
+Directional scratchesを引き延ばし、VectorWarpで歪ませる  
+そして、それをSlope情報としてSlope Blur Grayscaleに接続する。  
+VectorMapは法線などでも可  
+
+[![Image from Gyazo](https://i.gyazo.com/b6be1a0ac90fc7d3078e4350bfa5a6ea.gif)](https://gyazo.com/b6be1a0ac90fc7d3078e4350bfa5a6ea)
+
+## 風その2(形状に合わせるならこちらが楽そう)
+スクラッチで作った線にガウスノイズでワープで変形して少しランダム感を出す
+そしてそれをVectorWarpで形状に添わせる。  
+例えば頂上近くは必要ないなどあればHistogram　SelectなどでマスクしてNon uniform blurなどでブラーをかけて目立たなくさせる。
+Non uniform blurを使わなくても普通にかけたくない所をマスクしても見た目に差異はなし。  
+
+[![Image from Gyazo](https://i.gyazo.com/3156675ea553b9a8040f8d3fcf48599d.png)](https://gyazo.com/3156675ea553b9a8040f8d3fcf48599d)
+
+
+## 地割れ模様を作る
+Tile Randomでほとんど形状を作り、Edge Detectで境界線を抽出。  
+Edge Detectの結果で境界線を出力できるので、かなり応用が効く。  
+
+[![Image from Gyazo](https://i.gyazo.com/b0276a7cbf6ae02e829df704fd9589a1.png)](https://gyazo.com/b0276a7cbf6ae02e829df704fd9589a1)
+
+## 地割れ模様にランダム感を足す
+[![Image from Gyazo](https://i.gyazo.com/d2c48f0841db6ccfb51dfe75ebf11d5c.png)](https://gyazo.com/d2c48f0841db6ccfb51dfe75ebf11d5c)
+
+
+
