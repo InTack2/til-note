@@ -2,10 +2,11 @@
 Substance Designerでこうやったらこうできる面白いっ！っと思ったものを書いていく。
 
 ## 傾斜を作る
+HightMapにグラデージョンをブレンドして傾斜を作る  
 [![Image from Gyazo](https://i.gyazo.com/be4d54391989624a08f9ec5ee9fefcb9.gif)](https://gyazo.com/be4d54391989624a08f9ec5ee9fefcb9)
 
 ## 境界線を滑らかにする
-イメージとしては中央→外に向けて
+イメージとしては中央→外に向けて  
 [![Image from Gyazo](https://i.gyazo.com/472e15d0b38cc41457522ac3dc4507e7.png)](https://gyazo.com/472e15d0b38cc41457522ac3dc4507e7)
 
 
