@@ -2,6 +2,10 @@ div.md-grid{
     max-width: 75rem;
 }
 
+.wm-page-content {
+    max-width: 1200px;
+}
+
 /* div.md-container h1 {
     display: inline-flex;
 } */
@@ -15,64 +19,75 @@ div.md-container h1::before {
 
 
 
-div.md-container h1 {
-    /* font-size: 26pt;
-    font-weight: bold;*/
-    color: rgb(255, 255, 255); 
+h1 {
+    font-size: 3.5rem;
+    /* font-weight: bold; */
+    /* color: rgb(255, 255, 255);  */
     display: flex;
     counter-reset: h2;
-    border-bottom: 2mm ridge #2b5996;
-    padding-bottom: 2px;
+    /* border-bottom: 2mm ridge #2b5996;
+    padding-bottom: 2px; */
 }
 
-div.md-container h2::before{
+/* h2::before{
     margin-right : 8px;
     font-family: "FontAwesome" !important;
     content: "\f105" !important;
-}
+} */
 
-div.md-container h2 {
+h2 {
     display: flex;
+    font-size: 3.0rem;
     counter-reset: h3;
-    border-bottom: solid 4px #2b5996;
+    border-left: 6px solid #546e7a;
+    background-color: #ececec;
+    line-height: 1.4;
+    letter-spacing: 1px;
+    padding: 2px 16px;
+    /* color: #444; */
+    /* border-bottom: solid 3px #2b5996; */
     /* border-bottom: 1px dotted #29466d; */
-    padding-bottom: 2px;
+    /* padding-bottom: 2px; */
 }
 
 
-div.md-container h3 {
+h3 {
     display: flex;
     counter-reset: h4;
     counter-increment: h3;
-    border-bottom: 2px dashed #2b5996;
+    border-bottom: 2px dashed #546e7a;
+    line-height: 1.4;
+    padding: 4px;
 }
 
-div.md-container h3::before {
+h3::before {
     margin-right : 8px;
     content: counter(h3) ". " !important;
 }
 
-div.md-container h4 {
+h4 {
     display: flex;
     counter-increment: h4;
-    border-bottom: dotted 1px #2b5996;
+    border-bottom: dotted 1px #546e7a;
+    line-height: 1.4;
+    padding: 4px;
 }
 
-div.md-container h4::before {
+h4::before {
     margin-right : 8px;
     content: counter(h3) "-" counter(h4) ". " !important;
 }
 
 
 body {
+    font-size: 1.5rem;
+}
+
+.hljs {
     font-family: "Source Han Code JP";
 }
 
-div.highlight code {
-    font-family: "Source Han Code JP";
-}
-
-label.md-nav__link {
+/* label.md-nav__link {
     background-color: #3694e0;
     padding: 2px 2px 2px 10px;
     font-size: 0.7rem;
@@ -81,4 +96,4 @@ label.md-nav__link {
 
 .md-typeset__table table thead{
     background-color: #3694e0;
-}
+} */
