@@ -18,7 +18,8 @@ extra:
       link: https://twitter.com/Tack2_3D
 
 theme:
-  name: material
+  name: windmill
+  # name: material
   features:
     - tabs
     - instant
@@ -50,15 +51,14 @@ markdown_extensions:
   - fontawesome_markdown # :<id>:を使用して絵文字の入力できる機能を有効
   - markdown_blockdiag: # Makrkdownダイアグラムを有効
       format: svg
-  - pymdownx.emoji: # 絵文字を有効
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+  # - pymdownx.emoji: # 絵文字を有効
+  #     emoji_index: !!python/name:materialx.emoji.twemoji
+  #     emoji_generator: !!python/name:materialx.emoji.to_svg
   - toc:
       permalink: true # パーマリンクを有効
 
 extra_css:
-  - https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
+  # - https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
   - stylesheets/extra.css
-
-extra_javascript:
-  - javascripts/extra.js
+# extra_javascript:
+#   - javascripts/extra.js
