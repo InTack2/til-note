@@ -9,7 +9,7 @@ flake8 = "*"
 
 [packages]
 mkdocs = "*"
-mkdocs-material = "*"
+mkdocs-windmill = "*"
 mkdocs-awesome-pages-plugin = "*"
 fontawesome-markdown = "*"
 markdown-blockdiag = "*"
@@ -17,6 +17,7 @@ mkdocs-git-revision-date-localized-plugin = "*"
 PyYAML = ">=5.3.1"
 PyInquirer = ">=1.0.3"
 mkdocstrings = "*"
+
 
 [requires]
 python_version = "3.8"
