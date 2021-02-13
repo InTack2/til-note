@@ -1,9 +1,71 @@
-# CMakeでプラグインビルド環境構築
+# CMakeによるプラグインビルド環境構築
 ## 概要
 C++はWindowsやLinux、MacなどOSごとにコンパイルする必要がある。  
 MayaだとWindowsはVS、Linuxはgccなどになります。  
-MayaのpluginもそれぞれのOSに合わせてビルドが必要になる為、その都度環境を作成して行くのは大変です。  
-CMakeはその問題を解消すべく、専用の宣言ファイルを元にビルド環境自体を自動的に生成するツールとなります。  
+MayaのpluginもそれぞれのOSに合わせてビルドが必要になる為、その都度環境を作成して行くのは大変な為、CMakeを活用します。  
+
+
+## 方針(2021/02/13 追記)
+基本的に自前でcmakeファイルを用意して行うよりも、  
+対応する「devkit」を利用した方が一貫性がありおすすめなので、内容を変更しました。
+
+
+## 手順
+
+### Mayaの対応するdevkitをダウンロードする
+[こちらからダウンロード](https://www.autodesk.com/developer-network/platform-technologies/maya?_ga=2.22332605.720544780.1613183323-906704681.1609486821)
+
+下記の様にわかりやすい所に配置します。  
+[![Image from Gyazo](https://i.gyazo.com/0493a0dd6e526a31ce92bd6155454da2.png)](https://gyazo.com/0493a0dd6e526a31ce92bd6155454da2)
+
+### 配置した場所への環境変数を設定する
+
+下記の様に配置した場所へのパスを「DEVKIT_LOCATION」として設定します。  
+[![Image from Gyazo](https://i.gyazo.com/f953bbfeddc4f75752e12cd34b85ac94.png)](https://gyazo.com/f953bbfeddc4f75752e12cd34b85ac94)
+
+
+## 開発時
+あとは実際に開発する際に下記の様な「CMakeLists.txt」を用意して完了です。
+``` CMakeLists.txt
+cmake_minimum_required(VERSION 2.8)
+
+# 先ほど追加したDEVKIT_LOCATION内のplugin用cmakeファイルを利用する。
+include($ENV{DEVKIT_LOCATION}/cmake/pluginEntry.cmake)
+
+set(PROJECT_NAME "プロジェクト名")
+
+# CMakeに含めるファイル指定
+file(GLOB SOURCE_FILES
+   ${CMAKE_SOURCE_DIR}/src/*.h
+   ${CMAKE_SOURCE_DIR}/src/*.hpp
+   ${CMAKE_SOURCE_DIR}/src/*.cpp
+   )
+
+# ライブラリを指定
+set(LIBRARIES
+     OpenMaya
+     Foundation
+
+)
+
+set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
+
+# Build plugin
+build_plugin()
+set_target_properties(${PROJECT_NAME} PROPERTIES VS_DEBUGGER_COMMAND "maya.exe")
+set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/export:initializePlugin /export:uninitializePlugin")
+set(CMAKE_CXX_FLAGS_DEBUG "/ZI")
+
+```
+
+詳しいファイル構成などは下記をご参照ください。  
+<a href="https://github.com/InTack2/maya-aim-constraint-node"><img src="https://github-link-card.s3.ap-northeast-1.amazonaws.com/InTack2/maya-aim-constraint-node.png" width="460px"></a>
+
+
+
+
+## 以下以前自作していたCMakeファイル
+既に利用していませんが、一応残しておきます  
 
 ## ファイル構成
 
