@@ -29,7 +29,7 @@ theme:
     accent: blue
     scheme: slate
 plugins:
-  - search # necessary for search to work]
+  - search # necessary for search to work
   - awesome-pages
   - git-revision-date-localized
   - mkdocstrings
