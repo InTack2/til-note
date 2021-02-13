@@ -11,7 +11,7 @@
     <link rel="canonical" href="https://intack2.github.io/til-note/Maya/C%2B%2B/CMake/">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>CMakeでプラグインビルド環境構築 - Tack Til Note.</title>
+    <title>CMakeによるプラグインビルド環境構築 - Tack Til Note.</title>
     <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
@@ -33,11 +33,15 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "CMake\u3067\u30d7\u30e9\u30b0\u30a4\u30f3\u30d3\u30eb\u30c9\u74b0\u5883\u69cb\u7bc9", url: "#_top", children: [
+          {title: "CMake\u306b\u3088\u308b\u30d7\u30e9\u30b0\u30a4\u30f3\u30d3\u30eb\u30c9\u74b0\u5883\u69cb\u7bc9", url: "#_top", children: [
               {title: "\u6982\u8981", url: "#_1" },
-              {title: "\u30d5\u30a1\u30a4\u30eb\u69cb\u6210", url: "#_2" },
-              {title: "CMake\u30b3\u30de\u30f3\u30c9", url: "#cmake_1" },
-              {title: "\u53c2\u8003", url: "#_3" },
+              {title: "\u65b9\u91dd(2021/02/13 \u8ffd\u8a18)", url: "#20210213" },
+              {title: "\u624b\u9806", url: "#_2" },
+              {title: "\u958b\u767a\u6642", url: "#_4" },
+              {title: "\u4ee5\u4e0b\u4ee5\u524d\u81ea\u4f5c\u3057\u3066\u3044\u305fCMake\u30d5\u30a1\u30a4\u30eb", url: "#cmake_1" },
+              {title: "\u30d5\u30a1\u30a4\u30eb\u69cb\u6210", url: "#_5" },
+              {title: "CMake\u30b3\u30de\u30f3\u30c9", url: "#cmake_2" },
+              {title: "\u53c2\u8003", url: "#_6" },
           ]},
         ];
 
@@ -94,13 +98,58 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="cmake">CMakeでプラグインビルド環境構築<a class="headerlink" href="#cmake" title="Permanent link">&para;</a></h1>
+    <h1 id="cmake">CMakeによるプラグインビルド環境構築<a class="headerlink" href="#cmake" title="Permanent link">&para;</a></h1>
 <h2 id="_1">概要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>C++はWindowsやLinux、MacなどOSごとにコンパイルする必要がある。<br />
 MayaだとWindowsはVS、Linuxはgccなどになります。<br />
-MayaのpluginもそれぞれのOSに合わせてビルドが必要になる為、その都度環境を作成して行くのは大変です。<br />
-CMakeはその問題を解消すべく、専用の宣言ファイルを元にビルド環境自体を自動的に生成するツールとなります。  </p>
-<h2 id="_2">ファイル構成<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+MayaのpluginもそれぞれのOSに合わせてビルドが必要になる為、その都度環境を作成して行くのは大変な為、CMakeを活用します。  </p>
+<h2 id="20210213">方針(2021/02/13 追記)<a class="headerlink" href="#20210213" title="Permanent link">&para;</a></h2>
+<p>基本的に自前でcmakeファイルを用意して行うよりも、<br />
+対応する「devkit」を利用した方が一貫性がありおすすめなので、内容を変更しました。</p>
+<h2 id="_2">手順<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="mayadevkit">Mayaの対応するdevkitをダウンロードする<a class="headerlink" href="#mayadevkit" title="Permanent link">&para;</a></h3>
+<p><a href="https://www.autodesk.com/developer-network/platform-technologies/maya?_ga=2.22332605.720544780.1613183323-906704681.1609486821">こちらからダウンロード</a></p>
+<p>下記の様にわかりやすい所に配置します。<br />
+<a href="https://gyazo.com/0493a0dd6e526a31ce92bd6155454da2"><img alt="Image from Gyazo" src="https://i.gyazo.com/0493a0dd6e526a31ce92bd6155454da2.png" /></a></p>
+<h3 id="_3">配置した場所への環境変数を設定する<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>下記の様に配置した場所へのパスを「DEVKIT_LOCATION」として設定します。<br />
+<a href="https://gyazo.com/f953bbfeddc4f75752e12cd34b85ac94"><img alt="Image from Gyazo" src="https://i.gyazo.com/f953bbfeddc4f75752e12cd34b85ac94.png" /></a></p>
+<h2 id="_4">開発時<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>あとは実際に開発する際に下記の様な「CMakeLists.txt」を用意して完了です。
+<div class="highlight"><pre><span></span><code>cmake_minimum_required(VERSION 2.8)
+
+# 先ほど追加したDEVKIT_LOCATION内のplugin用cmakeファイルを利用する。
+include($ENV{DEVKIT_LOCATION}/cmake/pluginEntry.cmake)
+
+set(PROJECT_NAME &quot;プロジェクト名&quot;)
+
+# CMakeに含めるファイル指定
+file(GLOB SOURCE_FILES
+   ${CMAKE_SOURCE_DIR}/src/*.h
+   ${CMAKE_SOURCE_DIR}/src/*.hpp
+   ${CMAKE_SOURCE_DIR}/src/*.cpp
+   )
+
+# ライブラリを指定
+set(LIBRARIES
+     OpenMaya
+     Foundation
+
+)
+
+set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
+
+# Build plugin
+build_plugin()
+set_target_properties(${PROJECT_NAME} PROPERTIES VS_DEBUGGER_COMMAND &quot;maya.exe&quot;)
+set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS &quot;/export:initializePlugin /export:uninitializePlugin&quot;)
+set(CMAKE_CXX_FLAGS_DEBUG &quot;/ZI&quot;)
+</code></pre></div></p>
+<p>詳しいファイル構成などは下記をご参照ください。<br />
+<a href="https://github.com/InTack2/maya-aim-constraint-node"><img src="https://github-link-card.s3.ap-northeast-1.amazonaws.com/InTack2/maya-aim-constraint-node.png" width="460px"></a></p>
+<h2 id="cmake_1">以下以前自作していたCMakeファイル<a class="headerlink" href="#cmake_1" title="Permanent link">&para;</a></h2>
+<p>既に利用していませんが、一応残しておきます  </p>
+<h2 id="_5">ファイル構成<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>ルート<br />
 └build<br />
 └modules<br />
@@ -262,7 +311,7 @@ Mayaバージョンの指定、OSごとに拡張子の変更、読み込む内�
 <span class="n">MAYA_PLUGIN</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">PROJECT_NAME</span><span class="p">})</span>
 </code></pre></div>
 </div>
-<h2 id="cmake_1">CMakeコマンド<a class="headerlink" href="#cmake_1" title="Permanent link">&para;</a></h2>
+<h2 id="cmake_2">CMakeコマンド<a class="headerlink" href="#cmake_2" title="Permanent link">&para;</a></h2>
 <h3 id="visual-studio2019">Visual Studio2019の構成を作成<a class="headerlink" href="#visual-studio2019" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> build
 cmake -G <span class="s2">&quot;Visual Studio 16 2019&quot;</span> -DMAYA_VERSION<span class="o">=</span><span class="m">2020</span> ../
@@ -275,7 +324,7 @@ cmake --build . --config Debug
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> build
 cmake --build . --config Release
 </code></pre></div>
-<h2 id="_3">参考<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_6">参考<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p><a href="https://qiita.com/mrk_21/items/ab32a83a12f5d37acc64">CMake: モジュール</a><br />
 <a href="https://www.qoosky.io/techs/814fda555d">cmake チートシート</a>  </p>
 
