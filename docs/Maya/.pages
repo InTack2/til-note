@@ -1,5 +1,3 @@
 arrange:
-    - index.md
-    - English.md
-    - Site-Packages.md
+    - 設定関連
     - tox.md
