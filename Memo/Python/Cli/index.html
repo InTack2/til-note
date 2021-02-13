@@ -11,7 +11,7 @@
     <link rel="canonical" href="https://intack2.github.io/til-note/Memo/Python/Cli/">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Pythonを使ってCLI上で対話的にユーザー入力させる - Tack Til Note.</title>
+    <title>PyInquirerメモ - Tack Til Note.</title>
     <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
@@ -33,9 +33,9 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Python\u3092\u4f7f\u3063\u3066CLI\u4e0a\u3067\u5bfe\u8a71\u7684\u306b\u30e6\u30fc\u30b6\u30fc\u5165\u529b\u3055\u305b\u308b", url: "#_top", children: [
+          {title: "PyInquirer\u30e1\u30e2", url: "#_top", children: [
               {title: "Python Package", url: "#python-package" },
-              {title: "PyInquirer\u57fa\u672c\u7684\u306a\u4f7f\u3044\u65b9", url: "#pyinquirer" },
+              {title: "PyInquirer\u57fa\u672c\u7684\u306a\u4f7f\u3044\u65b9", url: "#pyinquirer_1" },
           ]},
         ];
 
@@ -76,7 +76,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
       <a href="../PythonCheatSheet/" class="btn btn-xs btn-link">
-        PythonCheatSheet
+        Pythonチートシート
       </a>
     </div>
     
@@ -92,8 +92,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="pythoncli">Pythonを使ってCLI上で対話的にユーザー入力させる<a class="headerlink" href="#pythoncli" title="Permanent link">&para;</a></h1>
-<p>こんな感じのやつが可能。
+    <h1 id="pyinquirer">PyInquirerメモ<a class="headerlink" href="#pyinquirer" title="Permanent link">&para;</a></h1>
+<p>こんな感じのやつが可能。<br />
 <a href="https://gyazo.com/234794e430c4ab5945eb005b98946550"><img alt="Image from Gyazo" src="https://i.gyazo.com/234794e430c4ab5945eb005b98946550.gif" /></a></p>
 <h2 id="python-package">Python Package<a class="headerlink" href="#python-package" title="Permanent link">&para;</a></h2>
 <p>有名どころで下記の2点  </p>
@@ -107,7 +107,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 PyInquirerはその様な不具合がなく<br />
 Windows Terminal、cmder、cmdなどでも正常に動作する為、<br />
 個人敵にPyInquirerをおすすめ  </p>
-<h2 id="pyinquirer">PyInquirer基本的な使い方<a class="headerlink" href="#pyinquirer" title="Permanent link">&para;</a></h2>
+<h2 id="pyinquirer_1">PyInquirer基本的な使い方<a class="headerlink" href="#pyinquirer_1" title="Permanent link">&para;</a></h2>
 <p>基本的にはInquirer、PyInquirerのどちらも<br />
 node.jsのInquirerを参考にしている為、似たような書き方で実現可能。</p>
 <p>なぜかPyInquirer公式のexamplesがエラー出る為、実際の動きとサンプルを記載。</p>
@@ -195,7 +195,7 @@ node.jsのInquirerを参考にしている為、似たような書き方で実�
 </code></pre></div></p>
 <h3 id="_4">チェックリスト<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p><span class="keys"><kbd class="key-space">Space</kbd></span>でチェック、<br />
-(ショートカット<span class="keys"><kbd class="key-a">A</kbd></span>でトグル、<span class="keys"><kbd class="key-i">I</kbd></span>で反転)
+(ショートカット<span class="keys"><kbd class="key-a">A</kbd></span>でトグル、<span class="keys"><kbd class="key-i">I</kbd></span>で反転)<br />
 <a href="https://gyazo.com/b9a09d4f02a5f6852e0b6de33d72ee76"><img alt="Image from Gyazo" src="https://i.gyazo.com/b9a09d4f02a5f6852e0b6de33d72ee76.gif" /></a>
 <div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
@@ -275,7 +275,7 @@ node.jsのInquirerを参考にしている為、似たような書き方で実�
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
       <a href="../PythonCheatSheet/" class="btn btn-xs btn-link">
-        PythonCheatSheet
+        Pythonチートシート
       </a>
     </div>
     

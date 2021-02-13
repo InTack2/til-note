@@ -11,7 +11,7 @@
     <link rel="canonical" href="https://intack2.github.io/til-note/Memo/Python/PythonCheatSheet/">
     <link rel="shortcut icon" href="../../../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>PythonCheatSheet - Tack Til Note.</title>
+    <title>Pythonチートシート - Tack Til Note.</title>
     <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
@@ -33,11 +33,10 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "script\u306e\u30d5\u30a9\u30eb\u30c0\u3092\u53d6\u5f97\u3059\u308b", url: "#_top", children: [
-          ]},
-          {title: "\u53ef\u5909\u9577\u5f15\u6570\u3067\u30a2\u30c8\u30ea\u30d3\u30e5\u30fc\u30c8\u306b\u683c\u7d0d\u3059\u308b", url: "#_1", children: [
-          ]},
-          {title: "cmds\u5468\u308a\u306enull\u56de\u907f", url: "#cmdsnull", children: [
+          {title: "Python\u30c1\u30fc\u30c8\u30b7\u30fc\u30c8", url: "#_top", children: [
+              {title: "script\u306e\u30d5\u30a9\u30eb\u30c0\u3092\u53d6\u5f97\u3059\u308b", url: "#script" },
+              {title: "\u53ef\u5909\u9577\u5f15\u6570\u3067\u30a2\u30c8\u30ea\u30d3\u30e5\u30fc\u30c8\u306b\u683c\u7d0d\u3059\u308b", url: "#_1" },
+              {title: "cmds\u5468\u308a\u306enull\u56de\u907f", url: "#cmdsnull" },
           ]},
         ];
 
@@ -78,7 +77,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
       <a href="../packages/" class="btn btn-xs btn-link">
-        PyPIにアップロードするまでに必要なこと
+        PyPIセットアップ
       </a>
     </div>
     
@@ -86,7 +85,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
       <a href="../Cli/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
         Previous</a><a href="../Cli/" class="btn btn-xs btn-link">
-        Pythonを使ってCLI上で対話的にユーザー入力させる
+        PyInquirerメモ
       </a>
     </div>
     
@@ -94,7 +93,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h2 id="script">scriptのフォルダを取得する<a class="headerlink" href="#script" title="Permanent link">&para;</a></h2>
+    <h1 id="python">Pythonチートシート<a class="headerlink" href="#python" title="Permanent link">&para;</a></h1>
+<h2 id="script">scriptのフォルダを取得する<a class="headerlink" href="#script" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 <span class="n">script_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
 </code></pre></div>
@@ -126,7 +126,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
       <a href="../packages/" class="btn btn-xs btn-link">
-        PyPIにアップロードするまでに必要なこと
+        PyPIセットアップ
       </a>
     </div>
     
@@ -134,7 +134,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
       <a href="../Cli/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
         Previous</a><a href="../Cli/" class="btn btn-xs btn-link">
-        Pythonを使ってCLI上で対話的にユーザー入力させる
+        PyInquirerメモ
       </a>
     </div>
     
