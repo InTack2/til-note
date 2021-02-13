@@ -1,3 +1,4 @@
+# Pythonチートシート
 ## scriptのフォルダを取得する
 ``` python
 import os

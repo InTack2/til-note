@@ -1,6 +1,6 @@
-# Pythonを使ってCLI上で対話的にユーザー入力させる
+# PyInquirerメモ
 
-こんな感じのやつが可能。
+こんな感じのやつが可能。  
 [![Image from Gyazo](https://i.gyazo.com/234794e430c4ab5945eb005b98946550.gif)](https://gyazo.com/234794e430c4ab5945eb005b98946550)
 
 ## Python Package
@@ -116,7 +116,7 @@ print(answers)
 
 ### チェックリスト
 ++space++でチェック、  
-(ショートカット++a++でトグル、++i++で反転)
+(ショートカット++a++でトグル、++i++で反転)  
 [![Image from Gyazo](https://i.gyazo.com/b9a09d4f02a5f6852e0b6de33d72ee76.gif)](https://gyazo.com/b9a09d4f02a5f6852e0b6de33d72ee76)
 ``` python
 # -*- coding: utf-8 -*-

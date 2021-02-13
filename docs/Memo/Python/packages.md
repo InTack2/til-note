@@ -1,4 +1,4 @@
-# PyPIにアップロードするまでに必要なこと
+# PyPIセットアップ
 PythonのモジュールをPyPIにあげるまでに必要なことをまとめます。
 
 ## setup.py setup.cfgの作成
