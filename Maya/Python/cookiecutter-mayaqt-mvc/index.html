@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="InTack2">
+    <link rel="canonical" href="https://intack2.github.io/til-note/Maya/Python/cookiecutter-mayaqt-mvc/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>cookiecutterでMaya用のテンプレートを作る - Tack Til Note.</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <link href="../../../stylesheets/extra.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "cookiecutter\u3067Maya\u7528\u306e\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u4f5c\u308b", url: "#_top", children: [
+              {title: "\u304d\u3063\u304b\u3051", url: "#_1" },
+              {title: "\u6982\u8981", url: "#_2" },
+              {title: "\u5c0e\u5165\u65b9\u6cd5", url: "#_3" },
+              {title: "\u69cb\u6210", url: "#_5" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-165693276-2', 'auto');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../tox/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../tox/" class="btn btn-xs btn-link">
+        テストでバージョンアップに備える
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../../VSCode/%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD/Extension/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../../VSCode/%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD/Extension/" class="btn btn-xs btn-link">
+        開発する
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="cookiecuttermaya">cookiecutterでMaya用のテンプレートを作る<a class="headerlink" href="#cookiecuttermaya" title="Permanent link">&para;</a></h1>
+<h2 id="_1">きっかけ<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>最近SubstanceDesignerのプラグイン開発を試している時に
+ドキュメントに「テンプレートはcookiecutterを利用している」と記載があり、<br />
+調べてみると<a href="https://github.com/pydanny/cookiecutter-django">Django</a>や<a href="https://github.com/cookiecutter-flask/cookiecutter-flask">Flask</a>なども出しており、Githubで検索するとかなりの量が<a href="https://github.com/search?q=cookiecutter">ヒット</a>します。  </p>
+<p>以前個人的に「<a href="https://github.com/InTack2/boip">boip</a>」という置き換えモジュールを作っていたのですが、それよりも断然使いやすそうだぞっ！という事で検証し、Maya用にサンプルを作成してみました。</p>
+<h2 id="_2">概要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/InTack2/cookiecutter-mayaqt-mvc"><img src="https://github-link-card.s3.ap-northeast-1.amazonaws.com/InTack2/cookiecutter-mayaqt-mvc.png" width="460px"></a>  </p>
+<p>cmdから実行し、質問に答えると下記のようなMaya用のテンプレートコードを生成することができます。<br />
+<a href="https://gyazo.com/678b5e203f8e8917f72d56bad9507c04"><img alt="Image from Gyazo" src="https://i.gyazo.com/678b5e203f8e8917f72d56bad9507c04.png" /></a><a href="https://gyazo.com/a9faef8a5930e4eebaa5e3765ae9673b"><img alt="Image from Gyazo" src="https://i.gyazo.com/a9faef8a5930e4eebaa5e3765ae9673b.png" /></a></p>
+<h2 id="_3">導入方法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="cookiecutter">cookiecutterのインストール<a class="headerlink" href="#cookiecutter" title="Permanent link">&para;</a></h3>
+<p><code>python -m pip istall cookiecutter</code></p>
+<h3 id="_4">上記のテンプレートを実行<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><code>python -m cookiecutter git+https://github.com/InTack2/cookiecutter-mayaqt-mvc.git</code></p>
+<h2 id="_5">構成<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>大枠の使い方は、リポジトリを見ていただく事で把握可能かと思いますが、<br />
+簡単にテンプレートの作り方を説明したいと思います。<br />
+<a href="https://cookiecutter.readthedocs.io/en/1.7.2/README.html">公式</a></p>
+<h3 id="cookiecutterjson">cookiecutter.jsonを用意する<a class="headerlink" href="#cookiecutterjson" title="Permanent link">&para;</a></h3>
+<p>cookiecutterの設定、質問内容をこちらに記載します。<br />
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="err">//</span> <span class="err">質問内容</span>
+    <span class="nt">&quot;full_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Your name&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;Your address email (eg. you@example.com)&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;tool_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Name of the project&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;tool_slug&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ cookiecutter.tool_name|lower|replace(&#39; &#39;, &#39;-&#39;) }}&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;release_date&quot;</span><span class="p">:</span> <span class="s2">&quot;{% now &#39;local&#39; %}&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+
+    <span class="err">//</span> <span class="err">ji</span><span class="kc">n</span><span class="err">ja</span><span class="mi">2</span><span class="err">の拡張機能利用</span>
+    <span class="nt">&quot;_extensions&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;jinja2_time.TimeExtension&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;_copy_without_render&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;cookiecutter.json&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;{{cookiecutter.tool_slug}}&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<code>"full_name": "Your name"</code>などが一つずつ質問されます。  </p>
+<h3 id="_6">質問の答えの置き換え先を用意する<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>ユーザーが質問に対して入力した結果が<code>{{cookiecutter.質問名}}</code>として記載されたフォルダ名、ファイル名、コード内を置き換えを行います。<br />
+上記の例だと<code>{{cookiecutter.full_name}}</code>ですね。  </p>
+<p>私が用意したサンプルだと下記の様に<code>tool_name</code>でフォルダ名を指定する形にしています。<br />
+<div class="highlight"><pre><span></span><code>{{cookiecutter.tool_name}}
+  ├{{cookiecutter.tool_name}}
+  │└ツールの中身
+  └LICENSEなどなど
+</code></pre></div></p>
+<p>PythonのDjangoやFlaskを使用された事ある方はピンっと来たかもしれませんが、お察しの通りjinja2を利用し置き換えを行っている様です。  </p>
+<h3 id="_7">一部文字の置き換えや小文字などに指定する<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>上記の質問内容の<code>tool_slug</code>部分で利用しています。<br />
+少し記載方法が特殊な感じですが、意味としては、tool_nameの答えを小文字(lower)にし、<code>' '</code>半角スペースを<code>-</code>ハイフンに上書きするといった感じです。<br />
+<div class="highlight"><pre><span></span><code>    <span class="nt">&quot;tool_slug&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ cookiecutter.tool_name|lower|replace(&#39; &#39;, &#39;-&#39;) }}&quot;</span><span class="p">,</span>
+</code></pre></div></p>
+<h3 id="jinja2">Jinja2の拡張機能を利用する<a class="headerlink" href="#jinja2" title="Permanent link">&para;</a></h3>
+<p>サンプルでも現在の年月日取得用に利用しています。<br />
+本来は<code>pip install</code>等で追加して利用しますが、公式で下記の3つはインストール済みな様です。<br />
+<code>cookiecutter.extensions.JsonifyExtension</code><br />
+<code>cookiecutter.extensions.RandomStringExtension</code><br />
+<code>jinja2_time.TimeExtension</code>  </p>
+<div class="highlight"><pre><span></span><code>    <span class="nt">&quot;release_date&quot;</span><span class="p">:</span> <span class="s2">&quot;{% now &#39;local&#39; %}&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+
+    <span class="err">//</span> <span class="err">ji</span><span class="kc">n</span><span class="err">ja</span><span class="mi">2</span><span class="err">の拡張機能利用</span>
+    <span class="nt">&quot;_extensions&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;jinja2_time.TimeExtension&quot;</span>
+    <span class="p">],</span>
+</code></pre></div>
+<h3 id="_8">選択式にする<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>質問内容を配列にする事で選択式にすることができます。<br />
+ただ、選択した結果をjinja2の様にifで区切る事になるので、かなりifif祭りになりそうな予感がして微妙な気もしますが。  </p>
+<p><div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;license&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;MIT&quot;</span><span class="p">,</span> <span class="s2">&quot;BSD-3&quot;</span><span class="p">,</span> <span class="s2">&quot;GNU GPL v3.0&quot;</span><span class="p">,</span> <span class="s2">&quot;Apache Software License 2.0&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+詳しくは<a href="https://cookiecutter.readthedocs.io/en/1.7.2/advanced/choice_variables.html">こちら</a>から</p>
+<h3 id="_9">前処理、後処理を追加する<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>サンプルでは特に必要なかったので、利用しませんでしたが、<br />
+置き換え前、置き換え後に「hook」フォルダ以下のpythonファイルで実行可能な様です。<br />
+詳しくは<a href="https://cookiecutter.readthedocs.io/en/1.7.2/advanced/hooks.html">こちら</a>から</p>
+<h3 id="_10">個人的に気になる所<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li>選択式の結果でテンプレート先を標準では変更できない。<ul>
+<li>hookを利用して自前でテンプレートフォルダを分ける</li>
+<li>それぞれをリポジトリ分けて、指定した後にそのリポジトリを利用する形にするなど</li>
+</ul>
+</li>
+</ul>
+<p>以上です。<br />
+サンプルも少し学習がてら作り、ツッコミどころ満載だと思いますので、<br />
+こうした方が良いよ！などPR受け付けておりますので、お気軽にどうぞ！  </p>
+<h3 id="_11">おまけ<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<h4 id="cookiecutter_1">cookiecutterのテンプレート生成用のテンプレート<a class="headerlink" href="#cookiecutter_1" title="Permanent link">&para;</a></h4>
+<p>https://github.com/eviweb/cookiecutter-template
+https://github.com/sourcery-ai/python-best-practices-cookiecutter</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../tox/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../tox/" class="btn btn-xs btn-link">
+        テストでバージョンアップに備える
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../../VSCode/%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD/Extension/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../../VSCode/%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD/Extension/" class="btn btn-xs btn-link">
+        開発する
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/InTack2/til-note">InTack2/til-note</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
