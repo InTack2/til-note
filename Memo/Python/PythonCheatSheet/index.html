@@ -34,9 +34,10 @@
         
         var pageToc = [
           {title: "Python\u30c1\u30fc\u30c8\u30b7\u30fc\u30c8", url: "#_top", children: [
-              {title: "script\u306e\u30d5\u30a9\u30eb\u30c0\u3092\u53d6\u5f97\u3059\u308b", url: "#script" },
-              {title: "\u53ef\u5909\u9577\u5f15\u6570\u3067\u30a2\u30c8\u30ea\u30d3\u30e5\u30fc\u30c8\u306b\u683c\u7d0d\u3059\u308b", url: "#_1" },
+              {title: "\u30d1\u30b9", url: "#_1" },
+              {title: "\u30b3\u30f3\u30b9\u30c8\u30e9\u30af\u30bf", url: "#_2" },
               {title: "cmds\u5468\u308a\u306enull\u56de\u907f", url: "#cmdsnull" },
+              {title: "\u30a4\u30f3\u30dd\u30fc\u30c8\u95a2\u9023", url: "#_4" },
           ]},
         ];
 
@@ -94,11 +95,13 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <h1 id="python">Pythonチートシート<a class="headerlink" href="#python" title="Permanent link">&para;</a></h1>
-<h2 id="script">scriptのフォルダを取得する<a class="headerlink" href="#script" title="Permanent link">&para;</a></h2>
+<h2 id="_1">パス<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="script">scriptのフォルダを取得する<a class="headerlink" href="#script" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 <span class="n">script_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="_1">可変長引数でアトリビュートに格納する<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_2">コンストラクタ<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">可変長引数でアトリビュートに格納する<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Sample</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -108,7 +111,27 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">maya.cmds</span>
 <span class="n">select_object</span> <span class="o">=</span> <span class="n">cmds</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">select</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
 </code></pre></div>
-<p>https://speakerdeck.com/twada/write-code-every-day?slide=9</p>
+<h2 id="_4">インポート関連<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="import">Importされている物を確認する<a class="headerlink" href="#import" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="_5">インポートされている物を正規表現で確認で検索する<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+
+<span class="n">REGEX</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;検索対象&quot;</span><span class="p">)</span>
+
+
+<span class="n">hit_module_names</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">module_name</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">REGEX</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">module_name</span><span class="p">):</span>
+        <span class="n">hit_module_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">hit_module_names</span><span class="p">)</span>
+</code></pre></div>
 
   <br>
     
