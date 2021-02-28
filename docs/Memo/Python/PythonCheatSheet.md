@@ -47,3 +47,21 @@ for module_name in sys.modules:
 
 pprint.pprint(hit_module_names)
 ```
+
+## 正規表現
+### コメントなども含めて可読性を上げる
+例は[cookiecutter](https://github.com/cookiecutter/cookiecutter/blob/52dd18513bbab7f0fbfcb2938c9644d9092247cf/cookiecutter/repository.py#L9)のgitなどのリポジトリ、ssh、httpsかどうかの判断用。  
+ここでのコメントや改行は無視されている。  
+
+```python
+REPO_REGEX = re.compile(
+    r"""
+# something like git:// ssh:// file:// etc.
+((((git|hg)\+)?(git|ssh|file|https?):(//)?)
+ |                                      # or
+ (\w+@[\w\.]+)                          # something like user@...
+)
+""",
+    re.VERBOSE,
+)
+```
