@@ -38,6 +38,7 @@
               {title: "\u30b3\u30f3\u30b9\u30c8\u30e9\u30af\u30bf", url: "#_2" },
               {title: "cmds\u5468\u308a\u306enull\u56de\u907f", url: "#cmdsnull" },
               {title: "\u30a4\u30f3\u30dd\u30fc\u30c8\u95a2\u9023", url: "#_4" },
+              {title: "\u6b63\u898f\u8868\u73fe", url: "#_6" },
           ]},
         ];
 
@@ -131,6 +132,21 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
         <span class="n">hit_module_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
 
 <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">hit_module_names</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="_6">正規表現<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">コメントなども含めて可読性を上げる<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>例は<a href="https://github.com/cookiecutter/cookiecutter/blob/52dd18513bbab7f0fbfcb2938c9644d9092247cf/cookiecutter/repository.py#L9">cookiecutter</a>のgitなどのリポジトリ、ssh、httpsかどうかの判断用。<br />
+ここでのコメントや改行は無視されている。  </p>
+<div class="highlight"><pre><span></span><code><span class="n">REPO_REGEX</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"># something like git:// ssh:// file:// etc.</span>
+<span class="sd">((((git|hg)\+)?(git|ssh|file|https?):(//)?)</span>
+<span class="sd"> |                                      # or</span>
+<span class="sd"> (\w+@[\w\.]+)                          # something like user@...</span>
+<span class="sd">)</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span>
+<span class="p">)</span>
 </code></pre></div>
 
   <br>
